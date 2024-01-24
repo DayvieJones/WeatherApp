@@ -1,0 +1,79 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.blur-container {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  -webkit-backdrop-filter: blur(100px);
+          backdrop-filter: blur(100px); /* Blur-Effekt anpassen */
+  z-index: -1; /* Hintergrundelement hinter andere Elemente positionieren */
+}
+
+.weather-app {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  height: 100vh;
+  text-align: center;
+  padding: 1rem;
+  background: url(/pictures/sunnySky2.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.locationHeader {
+  font-size: 1.5rem;
+  color: white;
+  text-shadow: 2px 2px 2px rgb(0, 0, 0);
+}
+
+.currentWeather {
+  color: white;
+  text-shadow: 2px 1px 9px rgb(0, 0, 0);
+  padding: 1rem;
+  border-radius: 1rem;
+  margin-bottom: 4rem;
+}
+.currentWeather .currentTemperature {
+  font-size: 2.5rem;
+}
+.currentWeather .currentCondition {
+  font-size: 1rem;
+}
+.currentWeather .currentTemperatureRange {
+  display: flex;
+  margin-top: 1rem;
+  gap: 1rem;
+}
+.currentWeather .currentTemperatureRange .currentMaxTemperature {
+  text-align: right;
+}
+.currentWeather .currentTemperatureRange .currentMinTemperature {
+  text-align: left;
+}
+.currentWeather .currentTemperatureRange .currentMaxTemperature,
+.currentWeather .currentTemperatureRange .currentMinTemperature {
+  flex: 1;
+  font-size: 1rem;
+}
+
+.forecast7Days {
+  font-size: 1rem;
+  -webkit-backdrop-filter: blur(40px);
+          backdrop-filter: blur(40px);
+  padding: 0.8rem;
+  border-radius: 5px;
+  display: block;
+}
+.forecast7Days .forecast {
+  display: flex;
+  gap: 7rem;
+}
+.forecast7Days .forecastDay,
+.forecast7Days .forecastTempMin,
+.forecast7Days .forecastTempMax,
+.forecast7Days .forecastIcon {
+  margin: 0;
+}/*# sourceMappingURL=styles.css.map */

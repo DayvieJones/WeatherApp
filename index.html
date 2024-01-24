@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Forecast Carsten</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="weather-app">
+      <button onclick="loadForecast()">load</button>
+      <div class="currentWeather">
+        <div class="locationHeader">Cologne</div>
+        <div class="currentTemperature">25°C</div>
+        <div class="currentCondition">Sunny</div>
+        <div class="currentTemperatureRange">
+          <div class="currentMaxTemperature">H: 28°C</div>
+          <div class="currentMinTemperature">L: 20°C</div>
+        </div>
+      </div>
+      <div class="forecast7Days">
+        <div class="forecast">
+          <div class="forecastDay">Monday</div>
+          <div class="forecastTempMin">2°C</div>
+          <div class="forecastTempMax">2°C</div>
+          <i class="forecastIcon"></i>
+        </div>
+        <div class="forecast">
+          <div class="forecastDay">Tuesday</div>
+          <div class="forecastTempMin">2°C</div>
+          <div class="forecastTempMax">2°C</div>
+          <i class="forecastIcon"></i>
+        </div>
+        <div class="forecast">
+          <div class="forecastDay">Wednesday</div>
+          <div class="forecastTempMin">2°C</div>
+          <div class="forecastTempMax">2°C</div>
+          <i class="forecastIcon"></i>
+        </div>
+        <div class="forecast">
+          <div class="forecastDay">Thursday</div>
+          <div class="forecastTempMin">2°C</div>
+          <div class="forecastTempMax">2°C</div>
+          <i class="forecastIcon"></i>
+        </div>
+        <div class="forecast">
+          <div class="forecastDay">Friday</div>
+          <div class="forecastTempMin">2°C</div>
+          <div class="forecastTempMax">2°C</div>
+          <i class="forecastIcon"></i>
+        </div>
+        <div class="forecast">
+          <div class="forecastDay">Saturday</div>
+          <div class="forecastTempMin">2°C</div>
+          <div class="forecastTempMax">2°C</div>
+          <i class="forecastIcon"></i>
+        </div>
+        <div class="forecast">
+          <div class="forecastDay">Sunday</div>
+          <div class="forecastTempMin">2°C</div>
+          <div class="forecastTempMax">2°C</div>
+          <i class="forecastIcon"></i>
+        </div>
+      </div>
+    </div>
+    <script src="api.js"></script>
+
+    <script src="index.js"></script>
+  </body>
+</html>

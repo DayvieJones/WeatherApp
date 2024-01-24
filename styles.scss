@@ -1,0 +1,112 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+$primary-color: #007aff;
+$tertiaryColor: rgba(255, 255, 255, 0.5);
+$blurry-background-color: #4a90e2;
+$shadowColor: rgba(0, 0, 0, 1);
+.textColorCondition {
+  color: white;
+  text-shadow: 2px 2px 2px $shadowColor;
+}
+
+$backgroundSunny: url(/pictures/sunnySky2.jpg);
+$backgroundCloudy: url(/pictures/cloudySky.jpg);
+$backgroundRainy: url(/pictures/rainySky.jpg);
+$backgroundStormy: url(/pictures/stormySky.jpg);
+
+$headerFontSize: 2.5rem;
+$subHeaderFontSize: 1.5rem;
+$defaultFontSize: 1rem;
+
+.blur-container {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  backdrop-filter: blur(100px); /* Blur-Effekt anpassen */
+  z-index: -1; /* Hintergrundelement hinter andere Elemente positionieren */
+}
+
+.weather-app {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+  height: 100vh;
+  text-align: center;
+  padding: 1rem;
+  background: #{$backgroundSunny};
+  // background: #{$backgroundCloudy};
+  // background: #{$backgroundRainy};
+  // background: #{$backgroundStormy};
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.locationHeader {
+  font-size: $subHeaderFontSize;
+  color: $textColor;
+  text-shadow: 2px 2px 2px $shadowColor;
+}
+
+.currentWeather {
+  color: $textColor;
+  text-shadow: 2px 1px 9px $shadowColor;
+
+  padding: 1rem;
+  border-radius: 1rem;
+  margin-bottom: 4rem;
+
+  .currentTemperature {
+    font-size: $headerFontSize;
+  }
+  .currentCondition {
+    font-size: $defaultFontSize;
+  }
+
+  .currentTemperatureRange {
+    display: flex;
+    margin-top: 1rem;
+    gap: 1rem;
+
+    .currentMaxTemperature {
+      text-align: right;
+    }
+    .currentMinTemperature {
+      text-align: left;
+    }
+
+    .currentMaxTemperature,
+    .currentMinTemperature {
+      flex: 1;
+      font-size: $defaultFontSize;
+    }
+  }
+}
+
+.forecast7Days {
+  font-size: $defaultFontSize;
+  color: white;
+  text-shadow: 2px 2px 2px $shadowColor;
+  backdrop-filter: blur(40px);
+  padding: 0.8rem;
+  border-radius: 5px;
+  display: block;
+
+  .forecast {
+    display: flex;
+    gap: 7rem;
+    color: white;
+    text-shadow: 2px 2px 2px $shadowColor;
+  }
+
+  .forecastDay,
+  .forecastTempMin,
+  .forecastTempMax,
+  .forecastIcon {
+    color: white;
+    text-shadow: 2px 2px 2px $shadowColor;
+    margin: 0;
+  }
+}
