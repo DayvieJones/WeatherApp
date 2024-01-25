@@ -7,8 +7,9 @@ $primary-color: #007aff;
 $tertiaryColor: rgba(255, 255, 255, 0.5);
 $blurry-background-color: #4a90e2;
 $shadowColor: rgba(0, 0, 0, 1);
-.textColorCondition {
-  color: white;
+$textColor: white;
+@mixin textColorCondition {
+  color: $textColor;
   text-shadow: 2px 2px 2px $shadowColor;
 }
 
@@ -35,10 +36,10 @@ $defaultFontSize: 1rem;
   height: 100vh;
   text-align: center;
   padding: 1rem;
-  background: #{$backgroundSunny};
-  // background: #{$backgroundCloudy};
-  // background: #{$backgroundRainy};
-  // background: #{$backgroundStormy};
+  background: $backgroundSunny;
+  // background: $backgroundCloudy;
+  // background: $backgroundRainy;
+  // background: $backgroundStormy;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -80,7 +81,7 @@ $defaultFontSize: 1rem;
     .currentMaxTemperature,
     .currentMinTemperature {
       flex: 1;
-      font-size: $defaultFontSize;
+      font-size: $headerFontSize;
     }
   }
 }
@@ -97,16 +98,12 @@ $defaultFontSize: 1rem;
   .forecast {
     display: flex;
     gap: 7rem;
-    color: white;
-    text-shadow: 2px 2px 2px $shadowColor;
   }
 
   .forecastDay,
   .forecastTempMin,
   .forecastTempMax,
   .forecastIcon {
-    color: white;
-    text-shadow: 2px 2px 2px $shadowColor;
     margin: 0;
   }
 }
