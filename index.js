@@ -18,9 +18,7 @@ async function displayCurrentWeather(currentData) {
 async function displayHourlyForecastWeather(hourlyForecastData) {
   const forecastHour = hourlyForecastData.forecast.forecastday[0].hour;
   const forecastAstro = hourlyForecastData.forecast.forecastday[0].astro;
-  // ${forecastAstro.astro.sunrise}
 
-  //TODO:Rendern des Headers, so dass er nicht überschrieben wird
   let html = `<div class="hourlyForecastHeader">Sunrise: ${forecastAstro.sunrise}   |   Sunset: ${forecastAstro.sunset}
   </div>`;
 
@@ -40,11 +38,9 @@ async function displayHourlyForecastWeather(hourlyForecastData) {
 
 async function displayForecastWeather(forecastData) {
   const forecast = forecastData.forecast.forecastday;
-  //TODO:Rendern des Headers, so dass er nicht überschrieben wird
 
   let html = `<div class="forecastHeader">10-DAY FORECAST</div>`;
 
-  //TODO: Den code in eine Schleife umändern
   forecast.forEach((forecastDay) => {
     html += `    
       <div class="forecast">
@@ -88,3 +84,4 @@ function getTimeByEpoche(timestamp) {
 
   return `${hours} ${period}`;
 }
+loadForecast();
