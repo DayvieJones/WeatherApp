@@ -8,9 +8,10 @@
   </head>
   <body>
     <div class="weather-app">
+      <!-- Forecast of Current Weather -->
       <button onclick="loadForecast()">load</button>
       <div class="currentWeather">
-        <div class="locationHeader">Cologne</div>
+        <div class="locationHeader">My Location</div>
         <div class="currentTemperature">25°C</div>
         <div class="currentCondition">Sunny</div>
         <div class="currentTemperatureRange">
@@ -18,53 +19,100 @@
           <div class="currentMinTemperature">L: 20°C</div>
         </div>
       </div>
+
+<!-- Forcast hourly -->
+
+<div class="hourlyForecastSection">
+  <div class="hourlyForecastHeader">Sunrise: 8:00 AM | Sunset: 05:16 PM
+  </div>
+  <div class="hourlyForecastWrapper">
+    <div class="hourlyForecast">
+      <div class="hourForecast">Now</div>
+      <div class="hourlyTemp">18°C</div>
+    </div>
+    <div class="hourlyForecast">
+      <div class="hourForecast">10AM</div>
+    <div class="hourlyTemp">18°C</div>
+    </div>
+
+    <div class="hourlyForecast">
+      <div class="hourForecast">11AM</div>
+    <div class="hourlyTemp">18°C</div>
+    </div>
+
+    <div class="hourlyForecast">
+      <div class="hourForecast">12AM</div>
+    <div class="hourlyTemp">18°C</div>
+    </div>
+
+    <div class="hourlyForecast">
+      <div class="hourForecast">13AM</div>
+    <div class="hourlyTemp">18°C</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Forecast for 10 Days -->
+
       <div class="forecast7Days">
+        <div class="forecastHeader">10-DAY FORECAST</div>
         <div class="forecast">
           <div class="forecastDay">Monday</div>
-          <div class="forecastTempMin">2°C</div>
-          <div class="forecastTempMax">2°C</div>
-          <i class="forecastIcon"></i>
+          <div class="forecastTemp">
+            <div class="forecastTempMin">2°C</div>
+            <div class="forecastTempMax">2°C</div>
+          </div>
         </div>
         <div class="forecast">
           <div class="forecastDay">Tuesday</div>
-          <div class="forecastTempMin">2°C</div>
-          <div class="forecastTempMax">2°C</div>
-          <i class="forecastIcon"></i>
+          <div class="forecastTemp">
+            <div class="forecastTempMin">2°C</div>
+            <div class="forecastTempMax">2°C</div>
         </div>
+        </div>
+
         <div class="forecast">
           <div class="forecastDay">Wednesday</div>
-          <div class="forecastTempMin">2°C</div>
-          <div class="forecastTempMax">2°C</div>
-          <i class="forecastIcon"></i>
+          <div class="forecastTemp">
+            <div class="forecastTempMin">2°C</div>
+            <div class="forecastTempMax">2°C</div>
         </div>
+        </div>
+
         <div class="forecast">
           <div class="forecastDay">Thursday</div>
-          <div class="forecastTempMin">2°C</div>
-          <div class="forecastTempMax">2°C</div>
-          <i class="forecastIcon"></i>
+          <div class="forecastTemp">
+            <div class="forecastTempMin">2°C</div>
+            <div class="forecastTempMax">2°C</div>
         </div>
+        </div>
+
         <div class="forecast">
           <div class="forecastDay">Friday</div>
-          <div class="forecastTempMin">2°C</div>
-          <div class="forecastTempMax">2°C</div>
-          <i class="forecastIcon"></i>
+          <div class="forecastTemp">
+            <div class="forecastTempMin">2°C</div>
+            <div class="forecastTempMax">2°C</div>
         </div>
+        </div>
+
         <div class="forecast">
           <div class="forecastDay">Saturday</div>
-          <div class="forecastTempMin">2°C</div>
-          <div class="forecastTempMax">2°C</div>
-          <i class="forecastIcon"></i>
+          <div class="forecastTemp">
+            <div class="forecastTempMin">2°C</div>
+            <div class="forecastTempMax">2°C</div>
         </div>
+        </div>
+
         <div class="forecast">
           <div class="forecastDay">Sunday</div>
-          <div class="forecastTempMin">2°C</div>
-          <div class="forecastTempMax">2°C</div>
-          <i class="forecastIcon"></i>
+          <div class="forecastTemp">
+            <div class="forecastTempMin">2°C</div>
+            <div class="forecastTempMax">2°C</div>
         </div>
       </div>
     </div>
     <script src="api.js"></script>
-
     <script src="index.js"></script>
   </body>
 </html>

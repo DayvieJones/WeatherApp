@@ -1,5 +1,6 @@
 const currentWeatherElement = document.querySelector(".currentWeather");
 const forecastWeatherElement = document.querySelector(".forecast7Days");
+const hourlyForecastElement = document.querySelector(".hourlyForecastSection");
 
 async function displayCurrentWeather(currentData) {
   let html = `
@@ -13,26 +14,77 @@ async function displayCurrentWeather(currentData) {
 
   currentWeatherElement.innerHTML = html;
 }
+
+async function displayHourlyForecastWeather(hourlyForecastData) {
+  const forecastHour = hourlyForecastData.forecast.forecastday[0].hour;
+  const forecastAstro = hourlyForecastData.forecast.forecastday[0].astro;
+  // ${forecastAstro.astro.sunrise}
+
+  //TODO:Rendern des Headers, so dass er nicht überschrieben wird
+  let html = `<div class="hourlyForecastHeader">Sunrise: ${forecastAstro.sunrise}   |   Sunset: ${forecastAstro.sunset}
+  </div>`;
+
+  forecastHour.forEach((forecastHour) => {
+    html += `
+<div class="hourlyForecastWrapper">
+<div class="hourlyForecast">
+  <div class="hourForecast">${getTimeByEpoche(forecastHour.time_epoch)}</div>
+  <img src="${
+    forecastHour.condition.icon
+  }" alt=" weather icon" class="weatherIcon">
+  <div class="hourlyTemp">${forecastHour.temp_c}°C</div>
+</div>`;
+  });
+  hourlyForecastElement.innerHTML = html;
+}
+
 async function displayForecastWeather(forecastData) {
-  let html = "";
   const forecast = forecastData.forecast.forecastday;
+  //TODO:Rendern des Headers, so dass er nicht überschrieben wird
+
+  let html = `<div class="forecastHeader">10-DAY FORECAST</div>`;
+
   //TODO: Den code in eine Schleife umändern
   forecast.forEach((forecastDay) => {
-    html += `
-    <div class="forecast">
-      <div class="forecastTempMin">${forecastDay.day.mintemp_c}C</div>
-      <div class="forecastTempMax">${forecastDay.day.maxtemp_c}C</div>
-      <img src="${forecastDay.day.condition.icon}" alt="Weather Icon" />
+    html += `    
+      <div class="forecast">
+      <div class="forecastDay">${getDayOfWeekFromEpoch(
+        forecastDay.date_epoch * 1000
+      )}</div>
 
-    </div>
+      <img src="${
+        forecastDay.day.condition.icon
+      }" alt=" weather icon" class="weatherIcon"/>
+     <div class="forecastTemp">
+        <div class="forecastTempMin">${parseFloat(
+          forecastDay.day.mintemp_c
+        ).toFixed(0)}°C</div>
+        <div class="forecastTempMax">${parseFloat(
+          forecastDay.day.maxtemp_c
+        ).toFixed(0)}°C</div>
+      </div>
+      </div>
 `;
   });
   forecastWeatherElement.innerHTML = html;
 }
-// const tempDataC = body.forecast.forecastday[0].day.maxtemp_c;
-// const tempDataC = body.forecast.forecastday[0].day.mintemp_c;
-// <div id="forecastTempMinMo">${forecastData.forecast.forecastday[0].day.mintemp_c}C</div>
-// <div id="forecastTempMaxMo">${forecastData.forecast.forecastday[0].day.maxtemp_c}C</div>
-{
-  /* <img src="${forecastData.forecast.forecastday[6].condition.icon}" alt="Weather Icon" /> */
+
+function getDayOfWeekFromEpoch(timestamp) {
+  const daysOfWeek = ["Sun", "Mon", "Tu", "Wed", "Thu", "Fr", "Sat"];
+  const date = new Date(timestamp);
+  const dayIndex = date.getDay();
+
+  return daysOfWeek[dayIndex];
+}
+
+//TODO: timeByEpoche so abändern, dass die aktuelle Stunde als erstes gerendert wird, danach die darauf folgenden Stunden
+function getTimeByEpoche(timestamp) {
+  const date = new Date(timestamp * 1000); // Umrechnung von Sekunden zu Millisekunden
+  let hours = date.getHours();
+  const period = hours < 12 ? "AM" : "PM";
+
+  // Konvertiere die Stunden ins 12-Stunden-Format
+  hours = hours % 12 || 12;
+
+  return `${hours} ${period}`;
 }
