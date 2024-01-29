@@ -1,6 +1,11 @@
 const currentWeatherElement = document.querySelector(".currentWeather");
 const forecastWeatherElement = document.querySelector(".forecast7Days");
-const hourlyForecastElement = document.querySelector(".hourlyForecastSection");
+const hourlyForecastWrapperElement = document.querySelector(
+  ".hourlyForecastWrapper"
+);
+const hourlyForecastHeaderElement = document.querySelector(
+  ".hourlyForecastHeader"
+);
 
 async function displayCurrentWeather(currentData) {
   let html = `
@@ -19,13 +24,13 @@ async function displayHourlyForecastWeather(hourlyForecastData) {
   const forecastHour = hourlyForecastData.forecast.forecastday[0].hour;
   const forecastAstro = hourlyForecastData.forecast.forecastday[0].astro;
 
-  let html = `<div class="hourlyForecastHeader">Sunrise: ${forecastAstro.sunrise}   |   Sunset: ${forecastAstro.sunset}
-  </div>`;
+  hourlyForecastHeaderElement.textContent = `Sunrise: ${forecastAstro.sunrise}   |   Sunset: ${forecastAstro.sunset}`;
+
+  let html = ``;
 
   forecastHour.forEach((forecastHour) => {
     html += `
-<div class="hourlyForecastWrapper">
-<div class="hourlyForecast">
+  <div class="hourlyForecast">
   <div class="hourForecast">${getTimeByEpoche(forecastHour.time_epoch)}</div>
   <img src="${
     forecastHour.condition.icon
@@ -33,7 +38,7 @@ async function displayHourlyForecastWeather(hourlyForecastData) {
   <div class="hourlyTemp">${forecastHour.temp_c}°C</div>
 </div>`;
   });
-  hourlyForecastElement.innerHTML = html;
+  hourlyForecastWrapperElement.innerHTML = html;
 }
 
 async function displayForecastWeather(forecastData) {
@@ -84,4 +89,9 @@ function getTimeByEpoche(timestamp) {
 
   return `${hours} ${period}`;
 }
+
+//TODO: implementiere Funktion zum suchen von Städten
+//TODO: Dropdown Menü + Favorit Bookmarking
+function setLocation(inputLocation) {}
+
 loadForecast();

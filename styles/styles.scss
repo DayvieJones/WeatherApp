@@ -56,6 +56,17 @@ body,
   height: $height;
 }
 
+#searchIcon {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background: transparent;
+  border: 0;
+  color: $textColor;
+  backdrop-filter: blur(40px);
+  border-radius: 10px;
+}
+
 .weather-app {
   // font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
   //   "Helvetica Neue", Arial, sans-serif;
@@ -115,8 +126,6 @@ body,
 .hourlyForecastSection {
   @include backgroundCondition();
   margin-bottom: 1rem;
-  overflow-x: auto;
-  white-space: nowrap;
 
   .hourlyForecastHeader {
     @include headerPosition();
@@ -127,6 +136,8 @@ body,
 
   .hourlyForecastWrapper {
     display: flex;
+    overflow-x: auto;
+    white-space: nowrap;
     padding: 0 0.2rem;
   }
 
@@ -183,9 +194,30 @@ body,
     @include iconSize();
   }
 }
+.icon {
+  @include iconSize(35px, 35px);
+}
 
 // @media screen and (min-width: 1000px) {
 //   .forecast7Days {
 //     width: 70vw;
 //   }
 // }
+//
+//
+//
+#searchDropdown {
+  display: none;
+  position: absolute;
+  top: 40px; /* Ändere dies je nach deinem Layout */
+  right: 5px;
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.dropdown-item {
+  padding: 10px;
+  cursor: pointer;
+}
