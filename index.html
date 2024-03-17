@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -7,15 +7,60 @@
     <link rel="stylesheet" href="outputStyles/styles.css" />
   </head>
   <body>
-    <div class="weather-app">
+    <!-- Overlay Nav  -->
+
+    <div id="myNav" class="overlay hideNav">
+      <a href="#nav" id="closeButton">&times;</a>
+      <div class="overlay-content">
+        <div class="box">
+          <input
+            id="searchInput"
+            type="text"
+            class="input"
+            name="txt"
+            placeholder="Search..."
+          />
+          <button class="icon" id="searchExecute">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="w-6 h-6"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"
+              />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="weather-app" id="weatherApp">
       <!-- Forecast of Current Weather -->
-      <button class="icon" id="searchIcon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-        <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
-      </svg>
+
+      <button class="icon" id="searchIcon">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="w-6 h-6"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"
+          />
+        </svg>
       </button>
-      <button onclick="loadForecast()">load</button>
       <div class="currentWeather">
-        <div class="locationHeader">My Location</div>
+        <div class="locationHeader">Cologne</div>
         <div class="currentTemperature">25°C</div>
         <div class="currentCondition">Sunny</div>
         <div class="currentTemperatureRange">
@@ -24,95 +69,104 @@
         </div>
       </div>
 
-<!-- Forcast hourly -->
+      <!-- Forcast hourly -->
 
-<div class="hourlyForecastSection">
-  <div class="hourlyForecastHeader">Sunrise: 8:00 AM | Sunset: 05:16 PM</div>
-  
-    <div  class="hourlyForecastWrapper">
-      <div class="hourlyForecast">
-        <div class="hourForecast">Now</div>
-        <div class="hourlyTemp">18°C</div>
-      </div>  
-      <div class="hourlyForecast">
-        <div class="hourForecast">10AM</div>
-        <div class="hourlyTemp">18°C</div>
-      </div>  
-      <div class="hourlyForecast">
-        <div class="hourForecast">11AM</div>
-        <div class="hourlyTemp">18°C</div>
-      </div>  
-      <div class="hourlyForecast">
-        <div class="hourForecast">12AM</div>
-        <div class="hourlyTemp">18°C</div>
-      </div>  
-      <div class="hourlyForecast">
-        <div class="hourForecast">13AM</div>
-        <div class="hourlyTemp">18°C</div>
+      <div class="hourlyForecastSection">
+        <div class="hourlyForecastHeader">
+          Sunrise: 8:00 AM | Sunset: 05:16 PM
+        </div>
+
+        <div class="hourlyForecastWrapper">
+          <div class="hourlyForecast">
+            <div class="hourForecast">Now</div>
+            <div class="hourlyTemp">18°C</div>
+          </div>
+          <div class="hourlyForecast">
+            <div class="hourForecast">10AM</div>
+            <div class="hourlyTemp">18°C</div>
+          </div>
+          <div class="hourlyForecast">
+            <div class="hourForecast">11AM</div>
+            <div class="hourlyTemp">18°C</div>
+          </div>
+          <div class="hourlyForecast">
+            <div class="hourForecast">12AM</div>
+            <div class="hourlyTemp">18°C</div>
+          </div>
+          <div class="hourlyForecast">
+            <div class="hourForecast">13AM</div>
+            <div class="hourlyTemp">18°C</div>
+          </div>
+        </div>
       </div>
-  </div> 
-</div>
 
-<!-- Forecast for 10 Days -->
+      <!-- Forecast for 3 Days -->
 
       <div class="forecast7Days">
-        <div class="forecastHeader">10-DAY FORECAST</div>
+        <div class="forecastHeader">3-DAY FORECAST</div>
         <div class="forecast">
           <div class="forecastDay">Monday</div>
           <div class="forecastTemp">
-            <div class="forecastTempMin">2°C</div>
-            <div class="forecastTempMax">2°C</div>
+            <div class="forecastTempMin">20°C</div>
+            <div class="forecastTempMax">22°C</div>
           </div>
         </div>
         <div class="forecast">
           <div class="forecastDay">Tuesday</div>
           <div class="forecastTemp">
-            <div class="forecastTempMin">2°C</div>
-            <div class="forecastTempMax">2°C</div>
+            <div class="forecastTempMin">18°C</div>
+            <div class="forecastTempMax">20°C</div>
+          </div>
         </div>
-        </div>
-
         <div class="forecast">
           <div class="forecastDay">Wednesday</div>
           <div class="forecastTemp">
-            <div class="forecastTempMin">2°C</div>
-            <div class="forecastTempMax">2°C</div>
+            <div class="forecastTempMin">15°C</div>
+            <div class="forecastTempMax">20°C</div>
+          </div>
         </div>
-        </div>
+      </div>
 
-        <div class="forecast">
-          <div class="forecastDay">Thursday</div>
-          <div class="forecastTemp">
-            <div class="forecastTempMin">2°C</div>
-            <div class="forecastTempMax">2°C</div>
-        </div>
-        </div>
+      <!-- Footer -->
 
-        <div class="forecast">
-          <div class="forecastDay">Friday</div>
-          <div class="forecastTemp">
-            <div class="forecastTempMin">2°C</div>
-            <div class="forecastTempMax">2°C</div>
-        </div>
-        </div>
-
-        <div class="forecast">
-          <div class="forecastDay">Saturday</div>
-          <div class="forecastTemp">
-            <div class="forecastTempMin">2°C</div>
-            <div class="forecastTempMax">2°C</div>
-        </div>
-        </div>
-
-        <div class="forecast">
-          <div class="forecastDay">Sunday</div>
-          <div class="forecastTemp">
-            <div class="forecastTempMin">2°C</div>
-            <div class="forecastTempMax">2°C</div>
+      <div class="footer">
+        <div id="bookmarks">
+          <button class="icon" id="buttonToMark">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="w-6 h-6"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0 1 11.186 0Z"
+              />
+            </svg>
+          </button>
+          <button class="icon" id="buttonToUnmark">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              class="w-6 h-6"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M6.32 2.577a49.255 49.255 0 0 1 11.36 0c1.497.174 2.57 1.46 2.57 2.93V21a.75.75 0 0 1-1.085.67L12 18.089l-7.165 3.583A.75.75 0 0 1 3.75 21V5.507c0-1.47 1.073-2.756 2.57-2.93Z"
+                clip-rule="evenodd"
+              />
+            </svg>
+          </button>
         </div>
       </div>
     </div>
-    <script src="api.js"></script>
-    <script src="index.js"></script>
+    <script src="./javascripts/settings.js"></script>
+    <script src="./javascripts/api.js"></script>
+    <script src="./javascripts/index.js"></script>
+    <script src="./javascripts/overlay.js"></script>
   </body>
 </html>
