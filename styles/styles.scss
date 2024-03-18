@@ -77,7 +77,7 @@ body,
 }
 
 .weather-app {
-  height: 100vh;
+  height: 98.5vh;
   width: 100%;
   position: relative;
   text-align: center;
@@ -207,14 +207,15 @@ body,
 #searchIcon,
 #searchExecute,
 #ButtonToUnmark,
-#ButtonToMark {
+#ButtonToMark,
+.dummy {
   cursor: pointer; /* Zeiger anzeigen, um anzuzeigen, dass es anklickbar ist */
 }
 
 //OVERLAY
 
 .overlay {
-  height: 0%;
+  // height: 0%;
   width: 100%;
   position: fixed;
   z-index: 1;
@@ -275,8 +276,8 @@ body,
   .box {
     // position: relative;
     display: flex;
-    align-items: center; // Align items vertically in the center
-    justify-content: space-between; // Space the elements evenly
+    align-items: center;
+    justify-content: space-between;
   }
 
   .input {
@@ -366,9 +367,19 @@ body,
   border: solid $tertiaryColor 0.5px;
 }
 
+.bookmarkPages {
+  display: flex;
+  flex-direction: block;
+}
+
+.dummy {
+  margin: 0.5rem;
+  color: $textColor;
+}
+
 #buttonToUnmark,
 #buttonToMark {
-  margin: 5px; /* Platzierung des Buttons anpassen */
+  margin: 5px;
   border-radius: 10px;
   background: transparent;
   border: 0;

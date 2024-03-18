@@ -162,7 +162,7 @@ function displayBackground(result) {
   const valDay = checkIncludesDay(result);
   const valBackground = checkWeatherCondition(result);
 
-  console.log(valDay, valBackground);
+  // console.log(valDay, valBackground);
 
   clearBackgroundAll();
 
@@ -223,22 +223,23 @@ toggleButtonVisibility();
 //BOOKMARK
 
 /*
-Überlegung ist, eine Liste zu erstellen. Diese Liste wird die Bookmark Objekte einthalten
+Überlegung ist, eine Liste zu erstellen. Diese Liste wird die Bookmark Objekte
 Die Bookmarks werden aus und in der LocalStorage geladen.
 Wenn kein Bookmark enthalten ist wird default geladen.
 Wird ein Bookmark hinzugefügt, kommt es an die nächste Stelle.
 Als dummy werden Felder in der Reihe erscheinen. Wird das Feld angeklickt wird das Bookmark geladen.
-
 
 edit: TODO: VH anpassen, ist aktuell scrollbar
 */
 
 const bookmarkList = [];
 const bookmark = {
+  id: 1,
   location: "Frankfurt",
   bookmark: false,
-  id: 1,
 };
+
+function addBookmarkPage() {}
 
 //EVENTLISTENER
 //TODO styles eher über klassen regeln DONE
