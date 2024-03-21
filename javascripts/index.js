@@ -29,6 +29,17 @@ function displayCurrentWeather(currentData) {
   currentWeatherEl.innerHTML = html;
 }
 
+const bookmarkList = [];
+let currentSelectedBookmarkID = null;
+
+function getBookmarks() {
+  return JSON.parse(localStorage.getItem(LOCALSTORAGE_BOOKMARKS)) || [];
+}
+
+function saveBookmarksToLocalStorage() {
+  localStorage.setItem(LOCALSTORAGE_BOOKMARKS, JSON.stringify(bookmarkList));
+}
+
 function displayHourlyForecastWeather(hourlyForecastData) {
   const forecastHour = hourlyForecastData.forecast.forecastday[0].hour;
   const forecastAstro = hourlyForecastData.forecast.forecastday[0].astro;
@@ -109,14 +120,6 @@ async function updateDisplay(location) {
   displayHourlyForecastWeather(result);
   displayForecastWeather(result);
   displayBackground(result);
-}
-
-function loadDataFromLocalStorage() {
-  return JSON.parse(localStorage.getItem(LOCALSTORAGE_DATA)) || [];
-}
-
-function saveDataInLocalStorage() {
-  localStorage.setItem(LOCALSTORAGE_DATA, JSON.stringify());
 }
 
 function checkWeatherCondition(condition) {
@@ -220,6 +223,27 @@ function toggleButtonVisibility() {
 
 toggleButtonVisibility();
 
+function getCurrentlySelectedBookmark() {
+  return document.querySelector(".selectedBookmark");
+}
+
+function getNextId() {
+  const bookmarks = getBookmarks();
+
+  const sortedBookmarks = bookmarks.sort(
+    (bookmarkA, bookmarkB) => bookmarkA.id - bookmarkB.id
+  );
+
+  let nextId = 1;
+
+  for (let bookmark of sortedBookmarks) {
+    if (nextId < bookmark.id) break;
+
+    nextId = bookmark.id + 1;
+  }
+  return nextId;
+}
+
 //BOOKMARK
 
 /*
@@ -229,31 +253,140 @@ Wenn kein Bookmark enthalten ist wird default geladen.
 Wird ein Bookmark hinzugefügt, kommt es an die nächste Stelle.
 Als dummy werden Felder in der Reihe erscheinen. Wird das Feld angeklickt wird das Bookmark geladen.
 
-edit: TODO: VH anpassen, ist aktuell scrollbar
+edit: TODO: VH WH anpassen, ist aktuell scrollbar no prio
 */
 
-const bookmarkList = [];
-const bookmark = {
-  id: 1,
-  location: "Frankfurt",
-  bookmark: false,
-};
+// const bookmark = {
+//   id: 1,
+//   location: "Frankfurt",
+//   bookmark: false,
+// };
 
-function addBookmarkPage() {}
+function addBookmarkPage() {
+  const locationHeaderEl = document.querySelector(".locationHeader");
+
+  const locationHeader = locationHeaderEl.innerHTML;
+  let bookmarked = undefined;
+
+  if (!buttonToUnmarkEl.classList.contains("iconHide")) {
+    bookmarked = true;
+  } else {
+    bookmarked = false;
+  }
+
+  let currentId = undefined;
+
+  const currentlySelectedBookmarkEl = getCurrentlySelectedBookmark();
+
+  if (currentlySelectedBookmarkEl) currentId = currentlySelectedBookmarkEl.id;
+
+  saveBookmark(locationHeader, bookmarked, Number(currentId));
+}
+
+function saveBookmark(location, bookmarked, id = undefined) {
+  //creating the Bookmark Object
+  if (!id) {
+    const newBookmark = {
+      id: getNextId(),
+      location,
+      bookmarked,
+    };
+    bookmarkList.push(newBookmark);
+    appendBookmark(newBookmark);
+  } else {
+    const indexOfNoteWithId = cardNotes.findIndex((note) => note.id === id);
+
+    if (indexOfNoteWithId > -1) {
+      cardNotes[indexOfNoteWithId] = {
+        id,
+        header,
+        text,
+        dateStamp: new Date().toLocaleString("de-DE"),
+      };
+    }
+    getCurrentlySelectedBookmark().remove();
+    appendBookmark(bookmarkList[indexOfNoteWithId]);
+  }
+  saveBookmarksToLocalStorage();
+}
+
+function appendBookmark(newBookmark) {
+  const bookmarkPagesDiv = document.querySelector(".bookmarkPages");
+
+  //Create new bookmark element
+  const bookmarkElement = document.createElement("div");
+  bookmarkElement.classList.add("bookmarkPage", "dummy", "isBookmarked");
+  bookmarkElement.id = newBookmark.id;
+  bookmarkElement.innerText = "O";
+
+  bookmarkPagesDiv.appendChild(bookmarkElement);
+
+  //Event listener to respond to bookmark element clicks
+  bookmarkElement.addEventListener("click", () => {
+    selectBookmark(newBookmark.id);
+  });
+}
+
+/*
+
+HIER
+
+*/
+
+//Aktuell wird hier dran gearbeitet
+function selectBookmark(id) {
+  const selectedBookmarkEl = document.querySelector(
+    `.bookmarkPage[id="${id}"]`
+  );
+  console.log(id);
+  console.log(selectedBookmarkEl);
+
+  if (selectedBookmarkEl.classList.contains("selectedBookmark")) return;
+
+  removeSelectedClassFromAllNotes();
+
+  selectedBookmarkEl.classList.add("selectedBookmark");
+
+  const selectedBookmark = bookmarkList.find(
+    (bookmark) => bookmark.id == Number(id)
+  );
+
+  if (!selectedBookmark) return;
+
+  console.log("Current Location is: " + locationHeaderEl);
+  currentSelectedBookmarkID = selectedBookmark.id;
+  console.log("Current ID: " + currentSelectedBookmarkID);
+}
+
+/*
+
+HIER
+
+*/
+
+function removeSelectedClassFromAllNotes() {
+  const bookmarks = document.querySelectorAll(".bookmark");
+
+  bookmarks.forEach((bookmark) => {
+    bookmark.classList.remove("selectedBookmark");
+  });
+}
 
 //EVENTLISTENER
 //TODO styles eher über klassen regeln DONE
 
+//Event to show the Nav
 searchIconEl.addEventListener("click", () => {
   openNav();
 });
 
+//Event to hide the Nav
 closeButtonEl.addEventListener("click", () => {
   closeNav();
   clearInput();
 });
 
-//Event to close nav while clicking on
+//Event to close nav while clicking on black background or out of nav
 weatherAppEl.addEventListener("click", (event) => {
   if (
     event.target.id !== "myNav" &&
@@ -266,8 +399,10 @@ weatherAppEl.addEventListener("click", (event) => {
 //Event to show bookmark icon
 buttonToMarkEl.addEventListener("click", (event) => {
   toggleButtonVisibility();
+  addBookmarkPage();
 });
 
-buttonToUnmarkEl.addEventListener("click", (event) => {
+//Event to hide bookmark icon
+buttonToUnmarkEl.addEventListener("click", () => {
   toggleButtonVisibility();
 });
