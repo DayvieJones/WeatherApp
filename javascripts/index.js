@@ -17,6 +17,11 @@ const buttonToUnmarkEl = document.getElementById("buttonToUnmark");
 const buttonToMarkEl = document.getElementById("buttonToMark");
 const bookmarksEl = document.getElementById("bookmarks");
 
+const bookmarkList = [];
+let currentSelectedBookmarkID = null;
+let currentSelectedBookmarkLocation = undefined;
+let filled = false;
+
 function displayCurrentWeather(currentData) {
   let html = `
       <div class="locationHeader">${currentData.location.name}</div>
@@ -27,17 +32,6 @@ function displayCurrentWeather(currentData) {
         <div class="currentMinTemperature">L: ${currentData.forecast.forecastday[0].day.mintemp_c}°C</div>
       </div>`;
   currentWeatherEl.innerHTML = html;
-}
-
-const bookmarkList = [];
-let currentSelectedBookmarkID = null;
-
-function getBookmarks() {
-  return JSON.parse(localStorage.getItem(LOCALSTORAGE_BOOKMARKS)) || [];
-}
-
-function saveBookmarksToLocalStorage() {
-  localStorage.setItem(LOCALSTORAGE_BOOKMARKS, JSON.stringify(bookmarkList));
 }
 
 function displayHourlyForecastWeather(hourlyForecastData) {
@@ -110,10 +104,6 @@ function getTimeByEpoche(timestamp) {
   return `${hours} ${period}`;
 }
 
-//TODO: implementiere Funktion zum suchen von Städten DONE
-//TODO: Overlay Menü + Favorit Bookmarking
-//TODO: SCSS click input and keep width DONE
-
 async function updateDisplay(location) {
   const result = await fetchForecast(location);
   displayCurrentWeather(result);
@@ -149,15 +139,18 @@ function checkWeatherCondition(condition) {
   }
 }
 
-//function to check if it's day or night for setting the background
+//Method to check if it's day or night for setting the background
 function checkIncludesDay(currentCondition) {
   const DayOrNightIcon = currentCondition.current.condition.icon;
+
   let valDay = true;
+
   if (DayOrNightIcon.includes("day")) {
     valDay = "Day";
   } else {
     valDay = "Night";
   }
+
   return valDay;
 }
 
@@ -191,6 +184,16 @@ function clearBackgroundAll() {
   );
 }
 
+//BOOKMARK
+
+function getBookmarks() {
+  return JSON.parse(localStorage.getItem(LOCALSTORAGE_BOOKMARKS)) || [];
+}
+
+function saveBookmarksToLocalStorage() {
+  localStorage.setItem(LOCALSTORAGE_BOOKMARKS, JSON.stringify(bookmarkList));
+}
+
 function showBookmarkIcon() {
   buttonToMarkEl.classList.remove("iconShow");
   buttonToMarkEl.classList.add("iconHide");
@@ -208,10 +211,9 @@ function hideBookmarkIcon() {
 }
 
 //Event to change svg bookmark from unfilled to filled
-let filled = false;
-
 function toggleButtonVisibility() {
   filled = !filled;
+
   if (filled) {
     buttonToMarkEl.classList.remove("iconHide");
     buttonToUnmarkEl.classList.add("iconHide");
@@ -219,12 +221,6 @@ function toggleButtonVisibility() {
     buttonToMarkEl.classList.add("iconHide");
     buttonToUnmarkEl.classList.remove("iconHide");
   }
-}
-
-toggleButtonVisibility();
-
-function getCurrentlySelectedBookmark() {
-  return document.querySelector(".selectedBookmark");
 }
 
 function getNextId() {
@@ -243,24 +239,6 @@ function getNextId() {
   }
   return nextId;
 }
-
-//BOOKMARK
-
-/*
-Überlegung ist, eine Liste zu erstellen. Diese Liste wird die Bookmark Objekte
-Die Bookmarks werden aus und in der LocalStorage geladen.
-Wenn kein Bookmark enthalten ist wird default geladen.
-Wird ein Bookmark hinzugefügt, kommt es an die nächste Stelle.
-Als dummy werden Felder in der Reihe erscheinen. Wird das Feld angeklickt wird das Bookmark geladen.
-
-edit: TODO: VH WH anpassen, ist aktuell scrollbar no prio
-*/
-
-// const bookmark = {
-//   id: 1,
-//   location: "Frankfurt",
-//   bookmark: false,
-// };
 
 function addBookmarkPage() {
   const locationHeaderEl = document.querySelector(".locationHeader");
@@ -294,14 +272,13 @@ function saveBookmark(location, bookmarked, id = undefined) {
     bookmarkList.push(newBookmark);
     appendBookmark(newBookmark);
   } else {
-    const indexOfNoteWithId = cardNotes.findIndex((note) => note.id === id);
+    const indexOfNoteWithId = bookmarkList.findIndex((note) => note.id === id);
 
     if (indexOfNoteWithId > -1) {
-      cardNotes[indexOfNoteWithId] = {
+      bookmarkList[indexOfNoteWithId] = {
         id,
-        header,
-        text,
-        dateStamp: new Date().toLocaleString("de-DE"),
+        location,
+        bookmarked,
       };
     }
     getCurrentlySelectedBookmark().remove();
@@ -327,23 +304,14 @@ function appendBookmark(newBookmark) {
   });
 }
 
-/*
-
-HIER
-
-*/
-
-//Aktuell wird hier dran gearbeitet
 function selectBookmark(id) {
   const selectedBookmarkEl = document.querySelector(
     `.bookmarkPage[id="${id}"]`
   );
-  console.log(id);
-  console.log(selectedBookmarkEl);
 
   if (selectedBookmarkEl.classList.contains("selectedBookmark")) return;
 
-  removeSelectedClassFromAllNotes();
+  removeSelectedClassFromAllPages();
 
   selectedBookmarkEl.classList.add("selectedBookmark");
 
@@ -353,24 +321,27 @@ function selectBookmark(id) {
 
   if (!selectedBookmark) return;
 
-  console.log("Current Location is: " + locationHeaderEl);
   currentSelectedBookmarkID = selectedBookmark.id;
-  console.log("Current ID: " + currentSelectedBookmarkID);
+  currentSelectedBookmarkLocation = selectedBookmark.location;
+
+  updateDisplay(currentSelectedBookmarkLocation);
 }
 
-/*
-
-HIER
-
-*/
-
-function removeSelectedClassFromAllNotes() {
-  const bookmarks = document.querySelectorAll(".bookmark");
+function removeSelectedClassFromAllPages() {
+  const bookmarks = document.querySelectorAll(".isBookmarked");
 
   bookmarks.forEach((bookmark) => {
     bookmark.classList.remove("selectedBookmark");
   });
 }
+
+function getCurrentlySelectedBookmark() {
+  return document.querySelector(".selectedBookmark");
+}
+
+function checkBookmarkedButton() {}
+
+toggleButtonVisibility();
 
 //EVENTLISTENER
 //TODO styles eher über klassen regeln DONE
