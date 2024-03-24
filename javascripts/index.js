@@ -316,13 +316,6 @@ function selectBookmark(id) {
   currentSelectedBookmarkID = selectedBookmark.id;
   currentSelectedBookmarkLocation = selectedBookmark.location;
 
-  log(
-    "Current ID is: " +
-      currentSelectedBookmarkID +
-      " Current Location is: " +
-      currentSelectedBookmarkLocation
-  );
-
   updateDisplay(currentSelectedBookmarkLocation);
 }
 
