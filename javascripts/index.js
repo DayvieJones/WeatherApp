@@ -23,6 +23,7 @@ let bookmarkList = [];
 let currentSelectedBookmarkID = null;
 let currentSelectedBookmarkLocation = undefined;
 let filled = false;
+// let currentSearchLocation = undefined;
 
 function displayCurrentWeather(currentData) {
   let weatherHtml = `
@@ -176,7 +177,23 @@ function clearBackgroundAll() {
   );
 }
 
-//BOOKMARK
+function getNextId() {
+  const bookmarks = getBookmarks();
+
+  const sortedBookmarks = bookmarks.sort(
+    (bookmarkA, bookmarkB) => bookmarkA.id - bookmarkB.id
+  );
+
+  let nextId = 1;
+
+  for (let bookmark of sortedBookmarks) {
+    if (nextId < bookmark.id) break;
+
+    nextId = bookmark.id + 1;
+  }
+  return nextId;
+}
+//BOOKMARK SECTION
 
 function getBookmarks() {
   return JSON.parse(localStorage.getItem(LOCALSTORAGE_BOOKMARKS)) || [];
@@ -212,27 +229,7 @@ function toggleButtonVisibility() {
   }
 }
 
-function getNextId() {
-  const bookmarks = getBookmarks();
-
-  const sortedBookmarks = bookmarks.sort(
-    (bookmarkA, bookmarkB) => bookmarkA.id - bookmarkB.id
-  );
-
-  let nextId = 1;
-
-  for (let bookmark of sortedBookmarks) {
-    if (nextId < bookmark.id) break;
-
-    nextId = bookmark.id + 1;
-  }
-  return nextId;
-}
-
-function addBookmarkPage() {
-  const locationHeaderEl = document.querySelector(".locationHeader");
-
-  const locationHeader = locationHeaderEl.innerHTML;
+function addBookmarkPage(location) {
   let bookmarked = undefined;
 
   if (!markedBookmarkButtonEl.classList.contains("iconHide")) {
@@ -247,7 +244,7 @@ function addBookmarkPage() {
 
   if (currentlySelectedBookmarkEl) currentId = currentlySelectedBookmarkEl.id;
 
-  saveBookmark(locationHeader, bookmarked, Number(currentId));
+  saveBookmark(location, bookmarked, Number(currentId));
 }
 
 //Creating the bookmark object
@@ -258,6 +255,7 @@ function saveBookmark(location, bookmarked, id = undefined) {
       location,
       bookmarked,
     };
+
     bookmarkList.push(newBookmark);
     appendBookmark(newBookmark);
   } else {
@@ -270,7 +268,6 @@ function saveBookmark(location, bookmarked, id = undefined) {
         bookmarked,
       };
     }
-
     getCurrentlySelectedBookmark().remove();
     appendBookmark(bookmarkList[indexOfPageWithId]);
   }
@@ -319,6 +316,12 @@ function selectBookmark(id) {
   updateDisplay(currentSelectedBookmarkLocation);
 }
 
+function initBookmarks() {
+  const test = getBookmarks();
+
+  appendBookmark(test);
+}
+
 function removeSelectedClassFromAllPages() {
   const bookmarks = document.querySelectorAll(".isBookmarked");
 
@@ -340,7 +343,6 @@ function deleteSelectedBookmark() {
   bookmarkList = bookmarkList.filter(
     (bookmark) => bookmark.id !== currentSelectedBookmarkID
   );
-  log(bookmarkList);
   // Save the updated list of bookmarks in localStorage
   saveBookmarksToLocalStorage();
 
@@ -353,10 +355,10 @@ function saveBookmarksToLocalStorage() {
 }
 
 function loadBookmarksFromLocalStorage() {
-  const bookmarkList = getBookmarks();
+  const bookmarkListss = getBookmarks();
 
-  bookmarkList.forEach((pages) => {
-    addBookmarkPage(pages);
+  bookmarkListss.forEach((pages) => {
+    initBookmarks(pages);
   });
 }
 
@@ -399,7 +401,7 @@ weatherAppEl.addEventListener("click", (event) => {
 //Event to show bookmark icon
 unmarkedBookmarkButtonEl.addEventListener("click", (event) => {
   toggleButtonVisibility();
-  addBookmarkPage();
+  addBookmarkPage(document.querySelector(".locationHeader").innerHTML);
 });
 
 //Event to hide bookmark icon
