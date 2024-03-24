@@ -31,7 +31,7 @@ searchInputEl.addEventListener("keydown", function (event) {
     updateDisplay(searchInputEl.value);
     clearInput();
     closeNav();
-    toggleButtonVisibility();
+    hideBookmarkIcon();
   }
 });
 
@@ -55,6 +55,6 @@ searchExecuteEl.addEventListener("click", async (event) => {
     updateDisplay(weatherLocation);
     clearInput();
     closeNav();
-    toggleButtonVisibility();
+    hideBookmarkIcon();
   }
 });

@@ -8,22 +8,24 @@ const weatherAppEl = document.querySelector(".weather-app");
 
 const searchIconEl = document.getElementById("searchIcon");
 const searchExecuteEl = document.getElementById("searchExecute");
-
 const searchInputEl = document.getElementById("searchInput");
 const closeButtonEl = document.getElementById("closeButton");
 const myNavEl = document.getElementById("myNav");
+
 const footerEl = document.querySelector(".footer");
-const buttonToUnmarkEl = document.getElementById("buttonToUnmark");
-const buttonToMarkEl = document.getElementById("buttonToMark");
+const markedBookmarkButtonEl = document.getElementById("markedBookmarkButton");
+const unmarkedBookmarkButtonEl = document.getElementById(
+  "unmarkedBookmarkButton"
+);
 const bookmarksEl = document.getElementById("bookmarks");
 
-const bookmarkList = [];
+let bookmarkList = [];
 let currentSelectedBookmarkID = null;
 let currentSelectedBookmarkLocation = undefined;
 let filled = false;
 
 function displayCurrentWeather(currentData) {
-  let html = `
+  let weatherHtml = `
       <div class="locationHeader">${currentData.location.name}</div>
       <div class="currentTemperature">${currentData.current.temp_c}°C</div>
       <div class="currentCondition">${currentData.current.condition.text}</div>
@@ -31,7 +33,7 @@ function displayCurrentWeather(currentData) {
         <div class="currentMaxTemperature">H: ${currentData.forecast.forecastday[0].day.maxtemp_c}°C</div>
         <div class="currentMinTemperature">L: ${currentData.forecast.forecastday[0].day.mintemp_c}°C</div>
       </div>`;
-  currentWeatherEl.innerHTML = html;
+  currentWeatherEl.innerHTML = weatherHtml;
 }
 
 function displayHourlyForecastWeather(hourlyForecastData) {
@@ -84,6 +86,15 @@ function displayForecastWeather(forecastData) {
   forecastWeatherEl.innerHTML = html;
 }
 
+function displayBackground(result) {
+  const valDay = checkIncludesDay(result);
+  const valBackground = checkWeatherCondition(result);
+
+  clearBackgroundAll();
+
+  weatherAppEl.classList.add("background" + valBackground + valDay);
+}
+
 function getDayOfWeekFromEpoch(timestamp) {
   const daysOfWeek = ["Sun", "Mon", "Tu", "Wed", "Thu", "Fr", "Sat"];
   const date = new Date(timestamp);
@@ -102,14 +113,6 @@ function getTimeByEpoche(timestamp) {
   hours = hours % 12 || 12;
 
   return `${hours} ${period}`;
-}
-
-async function updateDisplay(location) {
-  const result = await fetchForecast(location);
-  displayCurrentWeather(result);
-  displayHourlyForecastWeather(result);
-  displayForecastWeather(result);
-  displayBackground(result);
 }
 
 function checkWeatherCondition(condition) {
@@ -154,17 +157,6 @@ function checkIncludesDay(currentCondition) {
   return valDay;
 }
 
-function displayBackground(result) {
-  const valDay = checkIncludesDay(result);
-  const valBackground = checkWeatherCondition(result);
-
-  // console.log(valDay, valBackground);
-
-  clearBackgroundAll();
-
-  weatherAppEl.classList.add("background" + valBackground + valDay);
-}
-
 function clearBackgroundAll() {
   weatherAppEl.classList.remove(
     "backgroundSunnySkyDay",
@@ -190,36 +182,33 @@ function getBookmarks() {
   return JSON.parse(localStorage.getItem(LOCALSTORAGE_BOOKMARKS)) || [];
 }
 
-function saveBookmarksToLocalStorage() {
-  localStorage.setItem(LOCALSTORAGE_BOOKMARKS, JSON.stringify(bookmarkList));
-}
-
 function showBookmarkIcon() {
-  buttonToMarkEl.classList.remove("iconShow");
-  buttonToMarkEl.classList.add("iconHide");
+  unmarkedBookmarkButtonEl.classList.remove("iconShow");
+  unmarkedBookmarkButtonEl.classList.add("iconHide");
 
-  buttonToUnmarkEl.classList.remove("iconHide");
-  buttonToUnmarkEl.classList.add("iconShow");
+  markedBookmarkButtonEl.classList.remove("iconHide");
+  markedBookmarkButtonEl.classList.add("iconShow");
+  filled = false;
 }
 
 function hideBookmarkIcon() {
-  buttonToMarkEl.classList.add("iconShow");
-  buttonToMarkEl.classList.remove("iconHide");
+  unmarkedBookmarkButtonEl.classList.add("iconShow");
+  unmarkedBookmarkButtonEl.classList.remove("iconHide");
 
-  buttonToUnmarkEl.classList.add("iconHide");
-  buttonToUnmarkEl.classList.remove("iconShow");
+  markedBookmarkButtonEl.classList.add("iconHide");
+  markedBookmarkButtonEl.classList.remove("iconShow");
+  filled = true;
 }
 
 //Event to change svg bookmark from unfilled to filled
 function toggleButtonVisibility() {
   filled = !filled;
-
   if (filled) {
-    buttonToMarkEl.classList.remove("iconHide");
-    buttonToUnmarkEl.classList.add("iconHide");
+    unmarkedBookmarkButtonEl.classList.remove("iconHide");
+    markedBookmarkButtonEl.classList.add("iconHide");
   } else {
-    buttonToMarkEl.classList.add("iconHide");
-    buttonToUnmarkEl.classList.remove("iconHide");
+    unmarkedBookmarkButtonEl.classList.add("iconHide");
+    markedBookmarkButtonEl.classList.remove("iconHide");
   }
 }
 
@@ -246,7 +235,7 @@ function addBookmarkPage() {
   const locationHeader = locationHeaderEl.innerHTML;
   let bookmarked = undefined;
 
-  if (!buttonToUnmarkEl.classList.contains("iconHide")) {
+  if (!markedBookmarkButtonEl.classList.contains("iconHide")) {
     bookmarked = true;
   } else {
     bookmarked = false;
@@ -261,8 +250,8 @@ function addBookmarkPage() {
   saveBookmark(locationHeader, bookmarked, Number(currentId));
 }
 
+//Creating the bookmark object
 function saveBookmark(location, bookmarked, id = undefined) {
-  //creating the Bookmark Object
   if (!id) {
     const newBookmark = {
       id: getNextId(),
@@ -272,17 +261,18 @@ function saveBookmark(location, bookmarked, id = undefined) {
     bookmarkList.push(newBookmark);
     appendBookmark(newBookmark);
   } else {
-    const indexOfNoteWithId = bookmarkList.findIndex((note) => note.id === id);
+    const indexOfPageWithId = bookmarkList.findIndex((page) => page.id === id);
 
-    if (indexOfNoteWithId > -1) {
-      bookmarkList[indexOfNoteWithId] = {
+    if (indexOfPageWithId > -1) {
+      bookmarkList[indexOfPageWithId] = {
         id,
         location,
         bookmarked,
       };
     }
+
     getCurrentlySelectedBookmark().remove();
-    appendBookmark(bookmarkList[indexOfNoteWithId]);
+    appendBookmark(bookmarkList[indexOfPageWithId]);
   }
   saveBookmarksToLocalStorage();
 }
@@ -292,7 +282,7 @@ function appendBookmark(newBookmark) {
 
   //Create new bookmark element
   const bookmarkElement = document.createElement("div");
-  bookmarkElement.classList.add("bookmarkPage", "dummy", "isBookmarked");
+  bookmarkElement.classList.add("bookmarkPage", "isBookmarked");
   bookmarkElement.id = newBookmark.id;
   bookmarkElement.innerText = "O";
 
@@ -315,14 +305,23 @@ function selectBookmark(id) {
 
   selectedBookmarkEl.classList.add("selectedBookmark");
 
-  const selectedBookmark = bookmarkList.find(
-    (bookmark) => bookmark.id == Number(id)
-  );
+  const selectedBookmark = bookmarkList.find((page) => page.id === Number(id));
 
   if (!selectedBookmark) return;
 
+  if (selectedBookmarkEl.classList.contains("isBookmarked")) {
+    showBookmarkIcon();
+  }
+
   currentSelectedBookmarkID = selectedBookmark.id;
   currentSelectedBookmarkLocation = selectedBookmark.location;
+
+  log(
+    "Current ID is: " +
+      currentSelectedBookmarkID +
+      " Current Location is: " +
+      currentSelectedBookmarkLocation
+  );
 
   updateDisplay(currentSelectedBookmarkLocation);
 }
@@ -339,12 +338,48 @@ function getCurrentlySelectedBookmark() {
   return document.querySelector(".selectedBookmark");
 }
 
-function checkBookmarkedButton() {}
+function deleteSelectedBookmark() {
+  // Remove the selected bookmark from the DOM
+  const selectedBookmarkEl = document.querySelector(".selectedBookmark");
+  if (selectedBookmarkEl) selectedBookmarkEl.remove();
+
+  // Remove the selected bookmark from the bookmarkList array
+  bookmarkList = bookmarkList.filter(
+    (bookmark) => bookmark.id !== currentSelectedBookmarkID
+  );
+  log(bookmarkList);
+  // Save the updated list of bookmarks in localStorage
+  saveBookmarksToLocalStorage();
+
+  // Reset the currently selected bookmark ID
+  currentSelectedBookmarkID = null;
+}
+
+function saveBookmarksToLocalStorage() {
+  localStorage.setItem(LOCALSTORAGE_BOOKMARKS, JSON.stringify(bookmarkList));
+}
+
+function loadBookmarksFromLocalStorage() {
+  const bookmarkList = getBookmarks();
+
+  bookmarkList.forEach((pages) => {
+    addBookmarkPage(pages);
+  });
+}
+
+loadBookmarksFromLocalStorage();
 
 toggleButtonVisibility();
 
-//EVENTLISTENER
-//TODO styles eher über klassen regeln DONE
+async function updateDisplay(location) {
+  const result = await fetchForecast(location);
+  displayCurrentWeather(result);
+  displayHourlyForecastWeather(result);
+  displayForecastWeather(result);
+  displayBackground(result);
+}
+
+// EVENTLISTENER
 
 //Event to show the Nav
 searchIconEl.addEventListener("click", () => {
@@ -353,8 +388,8 @@ searchIconEl.addEventListener("click", () => {
 
 //Event to hide the Nav
 closeButtonEl.addEventListener("click", () => {
-  closeNav();
   clearInput();
+  closeNav();
 });
 
 //Event to close nav while clicking on black background or out of nav
@@ -363,17 +398,19 @@ weatherAppEl.addEventListener("click", (event) => {
     event.target.id !== "myNav" &&
     event.target.parentElement.id !== "searchIcon"
   ) {
+    clearInput();
     closeNav();
   }
 });
 
 //Event to show bookmark icon
-buttonToMarkEl.addEventListener("click", (event) => {
+unmarkedBookmarkButtonEl.addEventListener("click", (event) => {
   toggleButtonVisibility();
   addBookmarkPage();
 });
 
 //Event to hide bookmark icon
-buttonToUnmarkEl.addEventListener("click", () => {
+markedBookmarkButtonEl.addEventListener("click", (event) => {
   toggleButtonVisibility();
+  deleteSelectedBookmark();
 });

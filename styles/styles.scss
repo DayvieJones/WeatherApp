@@ -206,9 +206,9 @@ body,
 
 #searchIcon,
 #searchExecute,
-#ButtonToUnmark,
-#ButtonToMark,
-.dummy {
+#markedBookmarkButton,
+#unmarkedBookmarkButton,
+.bookmarkPage {
   cursor: pointer; /* Zeiger anzeigen, um anzuzeigen, dass es anklickbar ist */
 }
 
@@ -372,13 +372,13 @@ body,
   flex-direction: block;
 }
 
-.dummy {
+.bookmarkPage {
   margin: 0.5rem;
   color: $textColor;
 }
 
-#buttonToUnmark,
-#buttonToMark {
+#markedBookmarkButton,
+#unmarkedBookmarkButton {
   margin: 5px;
   border-radius: 10px;
   background: transparent;
