@@ -285,7 +285,6 @@ function appendBookmark(newBookmark) {
   bookmarkElement.innerText = "O";
 
   bookmarkPagesDiv.appendChild(bookmarkElement);
-  console.log(bookmarkElement);
   //Event listener to respond to bookmark element clicks
   bookmarkElement.addEventListener("click", () => {
     selectBookmark(newBookmark.id);
