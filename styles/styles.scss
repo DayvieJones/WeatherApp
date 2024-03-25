@@ -413,71 +413,71 @@ body,
 //BACKGROUND
 
 .weather-app.backgroundSunnySkyDay {
-  background: url(./utilitys/pictures/sunnySkyDay.jpg);
+  background: url(/WeatherApp/utilitys/pictures/sunnySkyDay.jpg);
   @include weatherBackgroundCondition();
 }
 
 .weather-app.backgroundSunnySkyNight {
-  background: url(/utilitys/pictures/sunnySkyNight.jpg);
+  background: url(/WeatherApp/utilitys/pictures/sunnySkyNight.jpg);
   @include weatherBackgroundCondition();
 }
 
 .weather-app.backgroundClearlySkyDay {
-  background: url(/utilitys/pictures/clearlySkyDay.jpg);
+  background: url(/WeatherApp/utilitys/pictures/clearlySkyDay.jpg);
   @include weatherBackgroundCondition();
 }
 
 .weather-app.backgroundClearlySkyNight {
-  background: url(/utilitys/pictures/clearlySkyNight.jpg);
+  background: url(/WeatherApp/utilitys/pictures/clearlySkyNight.jpg);
   @include weatherBackgroundCondition();
 }
 
 .weather-app.backgroundCloudySkyDay {
-  background: url(/utilitys/pictures/cloudySkyDay.jpg);
+  background: url(/WeatherApp/utilitys/pictures/cloudySkyDay.jpg);
   @include weatherBackgroundCondition();
 }
 
 .weather-app.backgroundCloudySkyNight {
-  background: url(/utilitys/pictures/cloudySkyNight.jpg);
+  background: url(/WeatherApp/utilitys/pictures/cloudySkyNight.jpg);
   @include weatherBackgroundCondition();
 }
 
 .weather-app.backgroundRainySkyDay {
-  background: url(/utilitys/pictures/rainySkyDay.jpg);
+  background: url(/WeatherApp/utilitys/pictures/rainySkyDay.jpg);
   @include weatherBackgroundCondition();
 }
 
 .weather-app.backgroundRainySkyNight {
-  background: url(/utilitys/pictures/rainySkyNight.jpg);
+  background: url(/WeatherApp/utilitys/pictures/rainySkyNight.jpg);
   @include weatherBackgroundCondition();
 }
 
 .weather-app.backgroundStormySkyNight {
-  background: url(/utilitys/pictures/stormySkyNight.jpg);
+  background: url(/WeatherApp/utilitys/pictures/stormySkyNight.jpg);
   @include weatherBackgroundCondition();
 }
 
 .weather-app.backgroundStormySkyDay {
-  background: url(/utilitys/pictures/stormySkyDay.jpg);
+  background: url(/WeatherApp/utilitys/pictures/stormySkyDay.jpg);
   @include weatherBackgroundCondition();
 }
 
 .weather-app.backgroundFoggySkyNight {
-  background: url(/utilitys/pictures/foggySkyNight.jpg);
+  background: url(/WeatherApp/utilitys/pictures/foggySkyNight.jpg);
   @include weatherBackgroundCondition();
 }
 
 .weather-app.backgroundFoggySkyDay {
-  background: url(/utilitys/pictures/foggySkyDay.jpg);
+  background: url(/WeatherApp/utilitys/pictures/foggySkyDay.jpg);
   @include weatherBackgroundCondition();
 }
 
 .weather-app.backgroundThunderySkyNight {
-  background: url(/utilitys/pictures/thunderySkyNight.jpg);
+  background: url(/WeatherApp/utilitys/pictures/thunderySkyNight.jpg);
   @include weatherBackgroundCondition();
 }
 
 .weather-app.backgroundThunderySkyDay {
-  background: url(/utilitys/pictures/thunderySkyDay.jpg);
+  background: url(/WeatherApp/utilitys/pictures/thunderySkyDay.jpg);
   @include weatherBackgroundCondition();
 }
