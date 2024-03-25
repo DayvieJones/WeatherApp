@@ -3,7 +3,7 @@ const DEFAULT_LOCATION = {
   id: "Cologne",
   bookmarked: true,
 };
-const BASE_URL = "http://api.weatherapi.com/v1";
+const BASE_URL = "https://api.weatherapi.com/v1";
 const LOCALSTORAGE_BOOKMARKS = "weatherApp_Bookmarks";
 // const weatherhemes = [
 //   {
