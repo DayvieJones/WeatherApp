@@ -19,11 +19,13 @@ const unmarkedBookmarkButtonEl = document.getElementById(
 );
 const bookmarksEl = document.getElementById("bookmarks");
 
-let bookmarkList = [];
 let currentSelectedBookmarkID = null;
 let currentSelectedBookmarkLocation = undefined;
 let filled = false;
-// let currentSearchLocation = undefined;
+
+loadBookmarksFromLocalStorage();
+
+toggleButtonVisibility();
 
 function displayCurrentWeather(currentData) {
   let weatherHtml = `
@@ -178,9 +180,9 @@ function clearBackgroundAll() {
 }
 
 function getNextId() {
-  const bookmarks = getBookmarks();
+  const bookmarkList = getBookmarks();
 
-  const sortedBookmarks = bookmarks.sort(
+  const sortedBookmarks = bookmarkList.sort(
     (bookmarkA, bookmarkB) => bookmarkA.id - bookmarkB.id
   );
 
@@ -193,8 +195,8 @@ function getNextId() {
   }
   return nextId;
 }
-//BOOKMARK SECTION
 
+//BOOKMARK SECTION
 function getBookmarks() {
   return JSON.parse(localStorage.getItem(LOCALSTORAGE_BOOKMARKS)) || [];
 }
@@ -249,18 +251,16 @@ function addBookmarkPage(location) {
 
 //Creating the bookmark object
 function saveBookmark(location, bookmarked, id = undefined) {
+  const bookmarkList = getBookmarks();
   if (!id) {
-    const newBookmark = {
+    bookmarkList.push({
       id: getNextId(),
       location,
       bookmarked,
-    };
-
-    bookmarkList.push(newBookmark);
-    appendBookmark(newBookmark);
+    });
   } else {
     const indexOfPageWithId = bookmarkList.findIndex((page) => page.id === id);
-
+    console.log(indexOfPageWithId);
     if (indexOfPageWithId > -1) {
       bookmarkList[indexOfPageWithId] = {
         id,
@@ -269,9 +269,10 @@ function saveBookmark(location, bookmarked, id = undefined) {
       };
     }
     getCurrentlySelectedBookmark().remove();
-    appendBookmark(bookmarkList[indexOfPageWithId]);
   }
-  saveBookmarksToLocalStorage();
+  console.log(bookmarkList);
+  saveBookmarksToLocalStorage(bookmarkList);
+  loadBookmarksFromLocalStorage();
 }
 
 function appendBookmark(newBookmark) {
@@ -284,7 +285,7 @@ function appendBookmark(newBookmark) {
   bookmarkElement.innerText = "O";
 
   bookmarkPagesDiv.appendChild(bookmarkElement);
-
+  console.log(bookmarkElement);
   //Event listener to respond to bookmark element clicks
   bookmarkElement.addEventListener("click", () => {
     selectBookmark(newBookmark.id);
@@ -292,6 +293,8 @@ function appendBookmark(newBookmark) {
 }
 
 function selectBookmark(id) {
+  const bookmarkList = getBookmarks();
+
   const selectedBookmarkEl = document.querySelector(
     `.bookmarkPage[id="${id}"]`
   );
@@ -316,10 +319,13 @@ function selectBookmark(id) {
   updateDisplay(currentSelectedBookmarkLocation);
 }
 
-function initBookmarks() {
-  const test = getBookmarks();
+function checkBookmarkContent() {
+  //Check the bookmark list to ensure that two locations can't be added at the same time
+  const location = document.querySelector(".locationHeader").innerHTML;
+  const checkedList = getBookmarks().find((page) => page.location === location);
 
-  appendBookmark(test);
+  if (checkedList) return;
+  addBookmarkPage(location);
 }
 
 function removeSelectedClassFromAllPages() {
@@ -335,36 +341,34 @@ function getCurrentlySelectedBookmark() {
 }
 
 function deleteSelectedBookmark() {
+  const bookmarkList = getBookmarks();
+
   // Remove the selected bookmark from the DOM
   const selectedBookmarkEl = document.querySelector(".selectedBookmark");
   if (selectedBookmarkEl) selectedBookmarkEl.remove();
 
   // Remove the selected bookmark from the bookmarkList array
-  bookmarkList = bookmarkList.filter(
+  const filterdBookmarkList = bookmarkList.filter(
     (bookmark) => bookmark.id !== currentSelectedBookmarkID
   );
   // Save the updated list of bookmarks in localStorage
-  saveBookmarksToLocalStorage();
+  saveBookmarksToLocalStorage(filterdBookmarkList);
 
   // Reset the currently selected bookmark ID
   currentSelectedBookmarkID = null;
 }
 
-function saveBookmarksToLocalStorage() {
+function saveBookmarksToLocalStorage(bookmarkList) {
   localStorage.setItem(LOCALSTORAGE_BOOKMARKS, JSON.stringify(bookmarkList));
 }
 
 function loadBookmarksFromLocalStorage() {
-  const bookmarkListss = getBookmarks();
+  const bookmarkLists = getBookmarks();
 
-  bookmarkListss.forEach((pages) => {
-    initBookmarks(pages);
+  bookmarkLists.forEach((pages) => {
+    appendBookmark(pages);
   });
 }
-
-loadBookmarksFromLocalStorage();
-
-toggleButtonVisibility();
 
 async function updateDisplay(location) {
   const result = await fetchForecast(location);
@@ -401,7 +405,7 @@ weatherAppEl.addEventListener("click", (event) => {
 //Event to show bookmark icon
 unmarkedBookmarkButtonEl.addEventListener("click", (event) => {
   toggleButtonVisibility();
-  addBookmarkPage(document.querySelector(".locationHeader").innerHTML);
+  checkBookmarkContent();
 });
 
 //Event to hide bookmark icon

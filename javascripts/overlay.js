@@ -32,6 +32,7 @@ searchInputEl.addEventListener("keydown", function (event) {
     clearInput();
     closeNav();
     hideBookmarkIcon();
+    removeSelectedClassFromAllPages();
   }
 });
 
@@ -56,5 +57,6 @@ searchExecuteEl.addEventListener("click", async (event) => {
     clearInput();
     closeNav();
     hideBookmarkIcon();
+    removeSelectedClassFromAllPages();
   }
 });

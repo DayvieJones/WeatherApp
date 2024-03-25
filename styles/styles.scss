@@ -362,7 +362,7 @@ body,
   align-items: center;
   margin-left: auto;
   margin-right: auto;
-  z-index: 2; /* Stellen Sie sicher, dass der Footer über anderen Elementen liegt */
+  z-index: 2;
   border-radius: 10px;
   border: solid $tertiaryColor 0.5px;
 }
@@ -384,6 +384,22 @@ body,
   background: transparent;
   border: 0;
   color: $textColor;
+}
+
+.bookmarkPage {
+  &.selectedBookmark {
+    width: 10px; // Breite des Kreises
+    height: 10px; // Höhe des Kreises
+    border-radius: 50%; // Rundes Element (Kreis)
+
+    // Hintergrundfarbe für das "O"
+    background-color: #ffffff; // Zum Beispiel Rot
+
+    // Zentrierung des Texts (falls notwendig)
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 }
 
 .iconShow {
