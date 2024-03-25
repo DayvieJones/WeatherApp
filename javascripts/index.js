@@ -232,7 +232,7 @@ function toggleButtonVisibility() {
 }
 
 function addBookmarkPage(location) {
-  let bookmarked = undefined;
+  let bookmarked = false;
 
   if (!markedBookmarkButtonEl.classList.contains("iconHide")) {
     bookmarked = true;
@@ -270,25 +270,32 @@ function saveBookmark(location, bookmarked, id = undefined) {
     }
     getCurrentlySelectedBookmark().remove();
   }
+
   console.log(bookmarkList);
+
   saveBookmarksToLocalStorage(bookmarkList);
   loadBookmarksFromLocalStorage();
 }
 
-function appendBookmark(newBookmark) {
-  const bookmarkPagesDiv = document.querySelector(".bookmarkPages");
+function clearExistingDivBookmarks(newBookmarkList) {
+  const bookmarkPagesEl = document.querySelector(".bookmarkPages");
+  bookmarkPagesEl.replaceChildren(...newBookmarkList);
+}
 
+function createBookmarkEl(newBookmark) {
+  console.log(newBookmark);
   //Create new bookmark element
   const bookmarkElement = document.createElement("div");
   bookmarkElement.classList.add("bookmarkPage", "isBookmarked");
   bookmarkElement.id = newBookmark.id;
   bookmarkElement.innerText = "O";
 
-  bookmarkPagesDiv.appendChild(bookmarkElement);
   //Event listener to respond to bookmark element clicks
   bookmarkElement.addEventListener("click", () => {
     selectBookmark(newBookmark.id);
   });
+  console.log(bookmarkElement);
+  return bookmarkElement;
 }
 
 function selectBookmark(id) {
@@ -364,9 +371,9 @@ function saveBookmarksToLocalStorage(bookmarkList) {
 function loadBookmarksFromLocalStorage() {
   const bookmarkLists = getBookmarks();
 
-  bookmarkLists.forEach((pages) => {
-    appendBookmark(pages);
-  });
+  const newBookmarkList = bookmarkLists.map((pages) => createBookmarkEl(pages));
+  console.log(newBookmarkList);
+  clearExistingDivBookmarks(newBookmarkList);
 }
 
 async function updateDisplay(location) {
