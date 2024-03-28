@@ -206,6 +206,7 @@ body,
 
 #searchIcon,
 #searchExecute,
+#closeButton,
 #markedBookmarkButton,
 #unmarkedBookmarkButton,
 .bookmarkPage {
@@ -238,7 +239,7 @@ body,
     margin-top: 30px;
   }
 
-  & a {
+  & button {
     padding: 8px;
     text-decoration: none;
     font-size: $defaultFontSize;
@@ -258,6 +259,9 @@ body,
     top: 0px;
     right: 10px;
     font-size: 60px;
+
+    background: transparent;
+    border: none;
   }
 
   @media screen and (max-height: 450px) {
@@ -326,9 +330,6 @@ body,
     z-index: -1;
   }
 
-  @media screen and (max-height: 450px) {
-  }
-
   .inputWide {
     width: 20rem;
   }
@@ -388,14 +389,12 @@ body,
 
 .bookmarkPage {
   &.selectedBookmark {
-    width: 10px; // Breite des Kreises
-    height: 10px; // Höhe des Kreises
+    width: 10px;
+    height: 10px;
     border-radius: 50%; // Rundes Element (Kreis)
 
-    // Hintergrundfarbe für das "O"
-    background-color: #ffffff; // Zum Beispiel Rot
+    background-color: #ffffff;
 
-    // Zentrierung des Texts (falls notwendig)
     display: flex;
     justify-content: center;
     align-items: center;
@@ -480,4 +479,7 @@ body,
 .weather-app.backgroundThunderySkyDay {
   background: url(../utilitys/pictures/thunderySkyDay.jpg);
   @include weatherBackgroundCondition();
+}
+
+@media screen and (max-height: 450px) {
 }

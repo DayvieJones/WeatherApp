@@ -23,6 +23,8 @@ let currentSelectedBookmarkID = null;
 let currentSelectedBookmarkLocation = undefined;
 let filled = false;
 
+appendEventlistener();
+
 loadBookmarksFromLocalStorage();
 
 toggleButtonVisibility();
@@ -381,35 +383,73 @@ async function updateDisplay(location) {
 // EVENTLISTENER
 
 //Event to show the Nav
-searchIconEl.addEventListener("click", () => {
-  openNav();
-});
 
-//Event to hide the Nav
-closeButtonEl.addEventListener("click", () => {
-  clearInput();
-  closeNav();
-});
+function appendEventlistener() {
+  searchIconEl.addEventListener("click", () => {
+    openNav();
+  });
 
-//Event to close nav while clicking on black background or out of nav
-weatherAppEl.addEventListener("click", (event) => {
-  if (
-    event.target.id !== "myNav" &&
-    event.target.parentElement.id !== "searchIcon"
-  ) {
+  //Event to hide the Nav
+  closeButtonEl.addEventListener("click", () => {
     clearInput();
     closeNav();
-  }
-});
+  });
 
-//Event to show bookmark icon
-unmarkedBookmarkButtonEl.addEventListener("click", (event) => {
-  toggleButtonVisibility();
-  checkBookmarkContent();
-});
+  //Event to close nav while clicking on black background or out of nav
+  weatherAppEl.addEventListener("click", (event) => {
+    if (
+      event.target.id !== "myNav" &&
+      event.target.parentElement.id !== "searchIcon"
+    ) {
+      clearInput();
+      closeNav();
+    }
+  });
 
-//Event to hide bookmark icon
-markedBookmarkButtonEl.addEventListener("click", (event) => {
-  toggleButtonVisibility();
-  deleteSelectedBookmark();
-});
+  //Event to show bookmark icon
+  unmarkedBookmarkButtonEl.addEventListener("click", (event) => {
+    toggleButtonVisibility();
+    checkBookmarkContent();
+  });
+
+  //Event to hide bookmark icon
+  markedBookmarkButtonEl.addEventListener("click", (event) => {
+    toggleButtonVisibility();
+    deleteSelectedBookmark();
+  });
+
+  searchInputEl.addEventListener("keydown", function (event) {
+    if (event.key === "Enter") {
+      updateDisplay(searchInputEl.value);
+      clearInput();
+      closeNav();
+      hideBookmarkIcon();
+      removeSelectedClassFromAllPages();
+    }
+  });
+
+  searchInputEl.addEventListener("click", function (event) {
+    if (event) {
+      styleInputWide();
+    }
+  });
+
+  myNavEl.addEventListener("click", (event) => {
+    if (event.target.id !== "searchInput") {
+      styleInputNarrow();
+      clearInput();
+    }
+  });
+
+  searchExecuteEl.addEventListener("click", async (event) => {
+    if (event.target.parentElement.id === "searchExecute") {
+      const weatherLocation = searchInputEl.value;
+      await fetchForecast(weatherLocation);
+      updateDisplay(weatherLocation);
+      clearInput();
+      closeNav();
+      hideBookmarkIcon();
+      removeSelectedClassFromAllPages();
+    }
+  });
+}

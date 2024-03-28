@@ -25,38 +25,3 @@ function styleInputNarrow() {
 }
 
 //EVENTLISTENER
-
-searchInputEl.addEventListener("keydown", function (event) {
-  if (event.key === "Enter") {
-    updateDisplay(searchInputEl.value);
-    clearInput();
-    closeNav();
-    hideBookmarkIcon();
-    removeSelectedClassFromAllPages();
-  }
-});
-
-searchInputEl.addEventListener("click", function (event) {
-  if (event) {
-    styleInputWide();
-  }
-});
-
-myNavEl.addEventListener("click", (event) => {
-  if (event.target.id !== "searchInput") {
-    styleInputNarrow();
-    clearInput();
-  }
-});
-
-searchExecuteEl.addEventListener("click", async (event) => {
-  if (event.target.parentElement.id === "searchExecute") {
-    const weatherLocation = searchInputEl.value;
-    await fetchForecast(weatherLocation);
-    updateDisplay(weatherLocation);
-    clearInput();
-    closeNav();
-    hideBookmarkIcon();
-    removeSelectedClassFromAllPages();
-  }
-});
