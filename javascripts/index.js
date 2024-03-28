@@ -260,7 +260,6 @@ function saveBookmark(location, bookmarked, id = undefined) {
     });
   } else {
     const indexOfPageWithId = bookmarkList.findIndex((page) => page.id === id);
-    console.log(indexOfPageWithId);
     if (indexOfPageWithId > -1) {
       bookmarkList[indexOfPageWithId] = {
         id,
@@ -270,8 +269,6 @@ function saveBookmark(location, bookmarked, id = undefined) {
     }
     getCurrentlySelectedBookmark().remove();
   }
-
-  console.log(bookmarkList);
 
   saveBookmarksToLocalStorage(bookmarkList);
   loadBookmarksFromLocalStorage();
@@ -283,7 +280,6 @@ function clearExistingDivBookmarks(newBookmarkList) {
 }
 
 function createBookmarkEl(newBookmark) {
-  console.log(newBookmark);
   //Create new bookmark element
   const bookmarkElement = document.createElement("div");
   bookmarkElement.classList.add("bookmarkPage", "isBookmarked");
@@ -294,7 +290,6 @@ function createBookmarkEl(newBookmark) {
   bookmarkElement.addEventListener("click", () => {
     selectBookmark(newBookmark.id);
   });
-  console.log(bookmarkElement);
   return bookmarkElement;
 }
 
@@ -370,9 +365,8 @@ function saveBookmarksToLocalStorage(bookmarkList) {
 
 function loadBookmarksFromLocalStorage() {
   const bookmarkLists = getBookmarks();
-
+  console.log();
   const newBookmarkList = bookmarkLists.map((pages) => createBookmarkEl(pages));
-  console.log(newBookmarkList);
   clearExistingDivBookmarks(newBookmarkList);
 }
 
