@@ -32,7 +32,6 @@ body,
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  background-size: cover;
   z-index: 1;
 }
 
@@ -170,7 +169,7 @@ body,
 #markedBookmarkButton,
 #unmarkedBookmarkButton,
 .bookmarkPage {
-  cursor: pointer; /* Zeiger anzeigen, um anzuzeigen, dass es anklickbar ist */
+  cursor: pointer;
 }
 
 .overlay {
@@ -211,21 +210,10 @@ body,
   top: 0px;
   right: 10px;
   font-size: 60px;
+  padding: 0;
+  margin: 0, 0.5rem, 0, 0;
   background: transparent;
   border: none;
-}
-@media screen and (max-height: 450px) {
-  .overlay {
-    overflow-y: auto;
-  }
-  .overlay a {
-    font-size: 20px;
-  }
-  .overlay .closeButton {
-    font-size: 1rem;
-    top: 15px;
-    right: 35px;
-  }
 }
 .overlay .box {
   display: flex;
@@ -250,13 +238,14 @@ body,
 .overlay #searchExecute {
   background: transparent;
   border: 0;
+  padding-bottom: 1rem;
   color: white;
   backdrop-filter: blur(40px);
   border-radius: 10px;
   margin-left: 10px;
 }
 .overlay .box:hover input {
-  width: 20rem;
+  width: 10rem;
   background: #3b3640;
   border-radius: 10px;
 }
@@ -301,7 +290,7 @@ body,
   align-items: center;
   margin-left: auto;
   margin-right: auto;
-  z-index: 2; /* Dadurch wird sichergestellt  */
+  z-index: 2;
   border-radius: 10px;
   border: solid rgba(255, 255, 255, 0.1) 0.5px;
 }
@@ -439,6 +428,22 @@ body,
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+}
+
+@media screen and (min-height: 600px) {
+  .weather-app {
+    font-size: 1.2rem;
+  }
+}
+@media screen and (min-height: 1000px) {
+  .weather-app {
+    font-size: 1.5rem;
+  }
+}
+@media screen and (min-height: 1200px) {
+  .weather-app {
+    font-size: 1.8rem;
+  }
 }
 
 /*# sourceMappingURL=styles.css.map */

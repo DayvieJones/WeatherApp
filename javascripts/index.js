@@ -374,16 +374,36 @@ function loadBookmarksFromLocalStorage() {
 
 async function updateDisplay(location) {
   const result = await fetchForecast(location);
+  displayBackground(result);
   displayCurrentWeather(result);
   displayHourlyForecastWeather(result);
   displayForecastWeather(result);
-  displayBackground(result);
+}
+
+async function fetchWeatherData(location) {
+  try {
+    const result = await fetchForecast(location);
+
+    updateDisplay(result);
+  } catch (error) {
+    console.error("Fehler beim Abrufen der Wetterdaten:", error);
+  }
+}
+
+function loadLastAddedBookmarkFromLocalStorage() {
+  const bookmarks = getBookmarks();
+  if (bookmarks.length > 0) {
+    // Sortiere die Lesezeichen nach ihrer ID in absteigender Reihenfolge,
+    // um das zuletzt hinzugefügte Lesezeichen zu erhalten und zu laden
+    const lastAddedBookmark = bookmarks.sort((a, b) => b.id - a.id)[0];
+
+    updateDisplay(lastAddedBookmark.location);
+  } else {
+    updateDisplay("Cologne");
+  }
 }
 
 // EVENTLISTENER
-
-//Event to show the Nav
-
 function appendEventlistener() {
   searchIconEl.addEventListener("click", () => {
     openNav();
@@ -451,5 +471,9 @@ function appendEventlistener() {
       hideBookmarkIcon();
       removeSelectedClassFromAllPages();
     }
+  });
+
+  window.addEventListener("DOMContentLoaded", () => {
+    loadLastAddedBookmarkFromLocalStorage();
   });
 }

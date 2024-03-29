@@ -15,7 +15,6 @@ async function fetchForecast(weatherlocation) {
     }
 
     const result = await response.json();
-
     if (Object.keys(result).length === 0) {
       throw new Error("Invalid input!");
     }
