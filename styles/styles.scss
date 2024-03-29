@@ -14,9 +14,9 @@ $underLine: 1px solid rgba(255, 255, 255, 0.2);
 $backgroundSunny: url(../utilitys/pictures/sunnySkyDay.jpg);
 
 // Schriftgrößen
-$headerFontSize: 2.5rem;
-$subHeaderFontSize: 1.3rem;
-$defaultFontSize: 1rem;
+$headerFontSize: 1.5rem;
+$subHeaderFontSize: 1rem;
+$defaultFontSize: 0.7rem;
 
 // Allgemeine Einstellungen
 * {
@@ -60,7 +60,7 @@ body {
 @mixin weatherBackgroundCondition {
   background-position: center;
   background-repeat: no-repeat;
-  background-size: cover;
+  // background-size: cover;
 }
 
 @mixin headerPosition() {
@@ -88,7 +88,7 @@ body {
 // Hauptanwendung
 .weather-app {
   height: 100vh;
-  overflow: hidden;
+  overflow-y: auto;
   position: relative;
   text-align: center;
   padding: 0.1rem;
@@ -112,7 +112,7 @@ body {
   text-shadow: 2px 1px 9px $shadowColor;
   padding: 1rem;
   border-radius: 1rem;
-  margin-bottom: 4rem;
+  margin-bottom: 2rem;
   .currentTemperature {
     font-size: $headerFontSize;
   }
@@ -361,8 +361,7 @@ body {
 }
 
 .footer {
-  position: absolute;
-  margin-bottom: 0.5rem;
+  position: fixed;
   bottom: 0;
   left: 0;
   right: 0;

@@ -28,7 +28,7 @@ body {
 
 .weather-app {
   height: 100vh;
-  overflow: hidden;
+  overflow-y: auto;
   position: relative;
   text-align: center;
   padding: 0.1rem;
@@ -40,7 +40,7 @@ body {
 }
 
 .locationHeader {
-  font-size: 2.5rem;
+  font-size: 1.5rem;
   color: white;
   text-shadow: 2px 2px 2px rgb(0, 0, 0);
 }
@@ -50,13 +50,13 @@ body {
   text-shadow: 2px 1px 9px rgb(0, 0, 0);
   padding: 1rem;
   border-radius: 1rem;
-  margin-bottom: 4rem;
+  margin-bottom: 2rem;
 }
 .currentWeather .currentTemperature {
-  font-size: 2.5rem;
+  font-size: 1.5rem;
 }
 .currentWeather .currentCondition {
-  font-size: 1rem;
+  font-size: 0.7rem;
 }
 .currentWeather .currentTemperatureRange {
   display: flex;
@@ -72,7 +72,7 @@ body {
 .currentWeather .currentTemperatureRange .currentMaxTemperature,
 .currentWeather .currentTemperatureRange .currentMinTemperature {
   flex: 1;
-  font-size: 1rem;
+  font-size: 0.7rem;
 }
 
 .hourlyForecastSection {
@@ -81,7 +81,7 @@ body {
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  font-size: 1rem;
+  font-size: 0.7rem;
   backdrop-filter: blur(40px);
   border-radius: 20px;
   color: white;
@@ -116,7 +116,7 @@ body {
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  font-size: 1rem;
+  font-size: 0.7rem;
   backdrop-filter: blur(40px);
   border-radius: 20px;
   color: white;
@@ -127,7 +127,7 @@ body {
   align-items: flex-start;
   display: flex;
   align-items: center;
-  font-size: 1rem;
+  font-size: 0.7rem;
   margin-bottom: 0.3rem;
 }
 .forecast3Days .forecast {
@@ -170,7 +170,7 @@ body {
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  font-size: 1rem;
+  font-size: 0.7rem;
   backdrop-filter: blur(40px);
   border-radius: 20px;
   color: white;
@@ -182,7 +182,7 @@ body {
   align-items: flex-start;
   display: flex;
   align-items: center;
-  font-size: 1rem;
+  font-size: 0.7rem;
   margin-bottom: 0.3rem;
 }
 .forecastAddons .addon-Wrapper {
@@ -237,7 +237,7 @@ body {
 .overlay button {
   padding: 8px;
   text-decoration: none;
-  font-size: 1rem;
+  font-size: 0.7rem;
   color: #818181;
   display: block;
   transition: 0.3s;
@@ -270,7 +270,7 @@ body {
   border-radius: 50px;
   box-sizing: border-box;
   font-family: Comic Sans MS;
-  font-size: 1rem;
+  font-size: 0.7rem;
   color: white;
   outline: none;
   transition: 0.4s;
@@ -318,8 +318,7 @@ body {
 }
 
 .footer {
-  position: absolute;
-  margin-bottom: 0.5rem;
+  position: fixed;
   bottom: 0;
   left: 0;
   right: 0;
@@ -376,98 +375,84 @@ body {
   background: url(../utilitys/pictures/sunnySkyDay.jpg);
   background-position: center;
   background-repeat: no-repeat;
-  background-size: cover;
 }
 
 .weather-app.backgroundSunnySkyNight {
   background: url(../utilitys/pictures/sunnySkyNight.jpg);
   background-position: center;
   background-repeat: no-repeat;
-  background-size: cover;
 }
 
 .weather-app.backgroundClearlySkyDay {
   background: url(../utilitys/pictures/clearlySkyDay.jpg);
   background-position: center;
   background-repeat: no-repeat;
-  background-size: cover;
 }
 
 .weather-app.backgroundClearlySkyNight {
   background: url(../utilitys/pictures/clearlySkyNight.jpg);
   background-position: center;
   background-repeat: no-repeat;
-  background-size: cover;
 }
 
 .weather-app.backgroundCloudySkyDay {
   background: url(../utilitys/pictures/cloudySkyDay.jpg);
   background-position: center;
   background-repeat: no-repeat;
-  background-size: cover;
 }
 
 .weather-app.backgroundCloudySkyNight {
   background: url(../utilitys/pictures/cloudySkyNight.jpg);
   background-position: center;
   background-repeat: no-repeat;
-  background-size: cover;
 }
 
 .weather-app.backgroundRainySkyDay {
   background: url(../utilitys/pictures/rainySkyDay.jpg);
   background-position: center;
   background-repeat: no-repeat;
-  background-size: cover;
 }
 
 .weather-app.backgroundRainySkyNight {
   background: url(../utilitys/pictures/rainySkyNight.jpg);
   background-position: center;
   background-repeat: no-repeat;
-  background-size: cover;
 }
 
 .weather-app.backgroundStormySkyNight {
   background: url(../utilitys/pictures/stormySkyNight.jpg);
   background-position: center;
   background-repeat: no-repeat;
-  background-size: cover;
 }
 
 .weather-app.backgroundStormySkyDay {
   background: url(../utilitys/pictures/stormySkyDay.jpg);
   background-position: center;
   background-repeat: no-repeat;
-  background-size: cover;
 }
 
 .weather-app.backgroundFoggySkyNight {
   background: url(../utilitys/pictures/foggySkyNight.jpg);
   background-position: center;
   background-repeat: no-repeat;
-  background-size: cover;
 }
 
 .weather-app.backgroundFoggySkyDay {
   background: url(../utilitys/pictures/foggySkyDay.jpg);
   background-position: center;
   background-repeat: no-repeat;
-  background-size: cover;
 }
 
 .weather-app.backgroundThunderySkyNight {
   background: url(../utilitys/pictures/thunderySkyNight.jpg);
   background-position: center;
   background-repeat: no-repeat;
-  background-size: cover;
 }
 
 .weather-app.backgroundThunderySkyDay {
   background: url(../utilitys/pictures/thunderySkyDay.jpg);
   background-position: center;
   background-repeat: no-repeat;
-  background-size: cover;
 }
 
 /*# sourceMappingURL=styles.css.map */
