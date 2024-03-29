@@ -93,9 +93,6 @@ function displayForecastWeather(forecastData) {
 
 function displayForecastAddons(forecastAddons) {
   const forecastAddonEl = document.querySelector(".forecastAddons");
-  // const humidity= forecastAddons.current.humidity;
-  // const windSpeed=forecastAddons.current.wind_kph;
-  // const windDirection=forecastAddons.current.wind_dir;
 
   let addonHTML = `
   <div class="forecastHeader" id="addonHeader">Addons</div>
@@ -135,7 +132,6 @@ function getDayOfWeekFromEpoch(timestamp) {
   return daysOfWeek[dayIndex];
 }
 
-//TODO: timeByEpoche so abändern, dass die aktuelle Stunde als erstes gerendert wird, danach die darauf folgenden Stunden
 function getTimeByEpoche(timestamp) {
   const date = new Date(timestamp * 1000); // Umrechnung von Sekunden zu Millisekunden
   let hours = date.getHours();
