@@ -11,6 +11,10 @@ body,
   font-style: normal;
 }
 
+body {
+  overflow: hidden;
+}
+
 #searchIcon {
   position: absolute;
   top: 5px;
@@ -24,7 +28,7 @@ body,
 
 .weather-app {
   height: 100vh;
-  width: 100%;
+  overflow: hidden;
   position: relative;
   text-align: center;
   padding: 0.1rem;
@@ -36,7 +40,7 @@ body,
 }
 
 .locationHeader {
-  font-size: 1.5rem;
+  font-size: 2.5rem;
   color: white;
   text-shadow: 2px 2px 2px rgb(0, 0, 0);
 }
@@ -80,7 +84,6 @@ body,
   font-size: 1rem;
   backdrop-filter: blur(40px);
   border-radius: 20px;
-  border: solid rgba(255, 255, 255, 0.1) 0.5px;
   color: white;
   text-shadow: 2px 2px 2px rgb(0, 0, 0);
   margin-bottom: 1rem;
@@ -107,7 +110,7 @@ body,
   height: 35px;
 }
 
-.forecast7Days {
+.forecast3Days {
   width: 80vw;
   padding: 0.8rem;
   margin: 0 auto;
@@ -116,46 +119,84 @@ body,
   font-size: 1rem;
   backdrop-filter: blur(40px);
   border-radius: 20px;
-  border: solid rgba(255, 255, 255, 0.1) 0.5px;
   color: white;
   text-shadow: 2px 2px 2px rgb(0, 0, 0);
 }
-.forecast7Days .forecastHeader {
+.forecast3Days .forecastHeader {
   display: flex;
   align-items: flex-start;
+  display: flex;
+  align-items: center;
+  font-size: 1rem;
+  margin-bottom: 0.3rem;
 }
-.forecast7Days .forecast {
+.forecast3Days .forecast {
   display: flex;
   justify-content: space-between;
   margin-bottom: 0.2rem;
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 }
-.forecast7Days .forecast .forecastDay {
+.forecast3Days .forecast .forecastDay {
   width: 100px;
 }
-.forecast7Days .forecast .forecastDay,
-.forecast7Days .forecast .forecastTemp {
+.forecast3Days .forecast .forecastDay,
+.forecast3Days .forecast .forecastTemp {
   display: flex;
   align-items: center;
   gap: 10vw;
   padding: 5px;
 }
-.forecast7Days .forecast .forecastTemp {
+.forecast3Days .forecast .forecastTemp {
   display: flex;
   align-items: center;
   justify-content: center;
   margin-left: 10px;
 }
-.forecast7Days .forecast .forecastTemp .forecastTempMin,
-.forecast7Days .forecast .forecastTemp .forecastTempMax {
+.forecast3Days .forecast .forecastTemp .forecastTempMin,
+.forecast3Days .forecast .forecastTemp .forecastTempMax {
   width: 50px;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-.forecast7Days .weatherIcon {
+.forecast3Days .weatherIcon {
   width: 35px;
   height: 35px;
+}
+
+.forecastAddons {
+  width: 80vw;
+  padding: 0.8rem;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  font-size: 1rem;
+  backdrop-filter: blur(40px);
+  border-radius: 20px;
+  color: white;
+  text-shadow: 2px 2px 2px rgb(0, 0, 0);
+  margin-top: 0.4rem;
+}
+.forecastAddons .forecastHeader {
+  display: flex;
+  align-items: flex-start;
+  display: flex;
+  align-items: center;
+  font-size: 1rem;
+  margin-bottom: 0.3rem;
+}
+.forecastAddons .addon-Wrapper {
+  display: flex;
+  flex-direction: column;
+}
+.forecastAddons .humidity-Wrapper,
+.forecastAddons .wind-kph-Wrapper,
+.forecastAddons .wind-Direction-Wrapper {
+  display: flex;
+  flex-direction: row;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  justify-content: space-between;
+  margin-bottom: 0.2rem;
 }
 
 .icon {
@@ -277,12 +318,12 @@ body,
 }
 
 .footer {
-  position: fixed;
-  margin-bottom: 0.2rem;
+  position: absolute;
+  margin-bottom: 0.5rem;
   bottom: 0;
   left: 0;
   right: 0;
-  width: 98%;
+  width: 97%;
   height: 5vh;
   backdrop-filter: blur(50px);
   display: flex;
@@ -298,6 +339,7 @@ body,
 .bookmarkPages {
   display: flex;
   flex-direction: block;
+  overflow-x: auto;
 }
 
 .bookmarkPage {
@@ -317,8 +359,6 @@ body,
 .bookmarkPage.selectedBookmark {
   width: 10px;
   height: 10px;
-  border-radius: 50%;
-  background-color: #ffffff;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -428,22 +468,6 @@ body,
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-}
-
-@media screen and (min-height: 600px) {
-  .weather-app {
-    font-size: 1.2rem;
-  }
-}
-@media screen and (min-height: 1000px) {
-  .weather-app {
-    font-size: 1.5rem;
-  }
-}
-@media screen and (min-height: 1200px) {
-  .weather-app {
-    font-size: 1.8rem;
-  }
 }
 
 /*# sourceMappingURL=styles.css.map */

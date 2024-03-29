@@ -15,7 +15,7 @@ $backgroundSunny: url(../utilitys/pictures/sunnySkyDay.jpg);
 
 // Schriftgrößen
 $headerFontSize: 2.5rem;
-$subHeaderFontSize: 1.5rem;
+$subHeaderFontSize: 1.3rem;
 $defaultFontSize: 1rem;
 
 // Allgemeine Einstellungen
@@ -30,6 +30,9 @@ body,
   font-weight: 300;
   font-style: normal;
 }
+body {
+  overflow: hidden;
+}
 
 // Mixins
 @mixin textColorCondition() {
@@ -39,6 +42,7 @@ body,
 
 @mixin blurryBackground() {
   backdrop-filter: blur(40px);
+  border: solid $tertiaryColor 1px;
 }
 
 @mixin backgroundCondition($scaleWidth: 80vw) {
@@ -50,7 +54,6 @@ body,
   font-size: $defaultFontSize;
   backdrop-filter: blur(40px);
   border-radius: 20px;
-  border: solid $tertiaryColor 0.5px;
   @include textColorCondition();
 }
 
@@ -85,7 +88,7 @@ body,
 // Hauptanwendung
 .weather-app {
   height: 100vh;
-  width: 100%;
+  overflow: hidden;
   position: relative;
   text-align: center;
   padding: 0.1rem;
@@ -98,7 +101,7 @@ body,
 
 // Ort Header
 .locationHeader {
-  font-size: $subHeaderFontSize;
+  font-size: $headerFontSize;
   color: $textColor;
   text-shadow: 2px 2px 2px $shadowColor;
 }
@@ -160,10 +163,14 @@ body,
 }
 
 // 7-Tage-Vorhersage
-.forecast7Days {
+.forecast3Days {
   @include backgroundCondition();
   .forecastHeader {
     @include headerPosition();
+    display: flex;
+    align-items: center;
+    font-size: $defaultFontSize;
+    margin-bottom: 0.3rem;
   }
   .forecast {
     display: flex;
@@ -196,6 +203,31 @@ body,
   }
   .weatherIcon {
     @include iconSize();
+  }
+}
+
+.forecastAddons {
+  @include backgroundCondition();
+  margin-top: 0.4rem;
+  .forecastHeader {
+    @include headerPosition();
+    display: flex;
+    align-items: center;
+    font-size: $defaultFontSize;
+    margin-bottom: 0.3rem;
+  }
+  .addon-Wrapper {
+    display: flex;
+    flex-direction: column;
+  }
+  .humidity-Wrapper,
+  .wind-kph-Wrapper,
+  .wind-Direction-Wrapper {
+    display: flex;
+    flex-direction: row;
+    border-bottom: $underLine;
+    justify-content: space-between;
+    margin-bottom: 0.2rem;
   }
 }
 
@@ -329,12 +361,12 @@ body,
 }
 
 .footer {
-  position: fixed;
-  margin-bottom: 0.2rem;
+  position: absolute;
+  margin-bottom: 0.5rem;
   bottom: 0;
   left: 0;
   right: 0;
-  width: 98%;
+  width: 97%;
   height: 5vh;
   backdrop-filter: blur(50px);
   display: flex;
@@ -350,6 +382,7 @@ body,
 .bookmarkPages {
   display: flex;
   flex-direction: block;
+  overflow-x: auto;
 }
 
 .bookmarkPage {
@@ -370,8 +403,8 @@ body,
   &.selectedBookmark {
     width: 10px;
     height: 10px;
-    border-radius: 50%; // Rundes Element (Kreis)
-    background-color: #ffffff;
+    // border-radius: 50%; // Rundes Element (Kreis)
+    // background-color: #ffffff;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -458,23 +491,63 @@ body,
 }
 
 // Media Queries
-@media screen and (min-height: 600px) {
-  .weather-app {
-    // Beispielstile für Bildschirmhöhe von mindestens 600px
-    font-size: 1.2rem;
-  }
-}
 
-@media screen and (min-height: 1000px) {
-  .weather-app {
-    // Beispielstile für Bildschirmhöhe von mindestens 1000px
-    font-size: 1.5rem;
-  }
-}
+// @media screen and (min-height: 600px) {
+//   .weather-app {
+//     font-size: 1.2rem;
+//   }
+//   .locationHeader {
+//     font-size: 3rem;
+//   }
 
-@media screen and (min-height: 1200px) {
-  .weather-app {
-    // Beispielstile für Bildschirmhöhe von mindestens 1200px
-    font-size: 1.8rem;
-  }
-}
+//   .currentWeather {
+//     .currentTemperature {
+//       font-size: $headerFontSize;
+//     }
+//     .currentCondition {
+//       font-size: $defaultFontSize;
+//     }
+//     .currentMaxTemperature,
+//     .currentMinTemperature {
+//       font-size: $defaultFontSize;
+//     }
+//   }
+//   .overlay {
+//     .input {
+//       width: 8rem;
+//     }
+//     .box:hover input {
+//       width: 15rem;
+//     }
+//   }
+// }
+
+// @media screen and (min-height: 1000px) {
+//   .weather-app {
+//     font-size: 1.5rem;
+//   }
+
+//   .overlay {
+//     .input {
+//       width: 10rem;
+//     }
+//     .box:hover input {
+//       width: 20rem;
+//     }
+//   }
+// }
+
+// @media screen and (min-height: 1200px) {
+//   .weather-app {
+//     font-size: 1.8rem;
+//   }
+
+//   .overlay {
+//     .input {
+//       width: 12rem;
+//     }
+//     .box:hover input {
+//       width: 25rem;
+//     }
+//   }
+// }

@@ -1,5 +1,5 @@
 const currentWeatherEl = document.querySelector(".currentWeather");
-const forecastWeatherEl = document.querySelector(".forecast7Days");
+const forecastWeatherEl = document.querySelector(".forecast3Days");
 const hourlyForecastWrapperEl = document.querySelector(
   ".hourlyForecastWrapper"
 );
@@ -30,7 +30,7 @@ loadBookmarksFromLocalStorage();
 toggleButtonVisibility();
 
 function displayCurrentWeather(currentData) {
-  let weatherHtml = `
+  let currentWeatherHtml = `
       <div class="locationHeader">${currentData.location.name}</div>
       <div class="currentTemperature">${currentData.current.temp_c}°C</div>
       <div class="currentCondition">${currentData.current.condition.text}</div>
@@ -38,7 +38,7 @@ function displayCurrentWeather(currentData) {
         <div class="currentMaxTemperature">H: ${currentData.forecast.forecastday[0].day.maxtemp_c}°C</div>
         <div class="currentMinTemperature">L: ${currentData.forecast.forecastday[0].day.mintemp_c}°C</div>
       </div>`;
-  currentWeatherEl.innerHTML = weatherHtml;
+  currentWeatherEl.innerHTML = currentWeatherHtml;
 }
 
 function displayHourlyForecastWeather(hourlyForecastData) {
@@ -89,6 +89,33 @@ function displayForecastWeather(forecastData) {
 `;
   });
   forecastWeatherEl.innerHTML = html;
+}
+
+function displayForecastAddons(forecastAddons) {
+  const forecastAddonEl = document.querySelector(".forecastAddons");
+  // const humidity= forecastAddons.current.humidity;
+  // const windSpeed=forecastAddons.current.wind_kph;
+  // const windDirection=forecastAddons.current.wind_dir;
+
+  let addonHTML = `
+  <div class="forecastHeader" id="addonHeader">Addons</div>
+  <div class="addon-Wrapper">
+    <div class="humidity-Wrapper">
+      <div class="humidity-Header">Humidity</div>
+      <div class="humidity-Value">${forecastAddons.current.humidity}%</div>
+    </div>
+    <div class="wind-Wrapper">
+      <div class="wind-kph-Wrapper">
+        <div class="wind-kph-Header">Wind speed</div>
+        <div class="wind-kph-value">${forecastAddons.current.wind_kph} km/h</div>
+      </div>
+      <div class="wind-Direction-Wrapper">
+        <div class="wind-Direction-Header">Wind Direction</div>
+        <div class="wind-Direction-Value">${forecastAddons.current.wind_dir}</div>
+      </div>
+    </div>
+  </div>`;
+  forecastAddonEl.innerHTML = addonHTML;
 }
 
 function displayBackground(result) {
@@ -378,6 +405,7 @@ async function updateDisplay(location) {
   displayCurrentWeather(result);
   displayHourlyForecastWeather(result);
   displayForecastWeather(result);
+  displayForecastAddons(result);
 }
 
 async function fetchWeatherData(location) {
