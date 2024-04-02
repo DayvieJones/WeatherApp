@@ -15,15 +15,9 @@ body {
   overflow: hidden;
 }
 
-#searchIcon {
-  position: absolute;
-  top: 5px;
-  right: 5px;
-  background: transparent;
-  border: 0;
-  color: white;
-  backdrop-filter: blur(40px);
-  border-radius: 10px;
+.icon {
+  width: 35px;
+  height: 35px;
 }
 
 .weather-app {
@@ -38,44 +32,88 @@ body {
   background-size: cover;
   z-index: 1;
 }
-
-.locationHeader {
+.weather-app #searchIcon {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background: transparent;
+  border: 0;
+  color: white;
+  backdrop-filter: blur(40px);
+  border-radius: 10px;
+}
+.weather-app .locationHeader {
   font-size: 1.5rem;
   color: white;
   text-shadow: 2px 2px 2px rgb(0, 0, 0);
 }
-
-.currentWeather {
+@media screen and (min-width: 600px) {
+  .weather-app .locationHeader {
+    font-size: 2rem;
+  }
+}
+@media screen and (min-width: 1000px) {
+  .weather-app .locationHeader {
+    font-size: 2.2rem;
+  }
+}
+.weather-app .currentWeather {
   color: white;
   text-shadow: 2px 1px 9px rgb(0, 0, 0);
   padding: 1rem;
   border-radius: 1rem;
   margin-bottom: 2rem;
 }
-.currentWeather .currentTemperature {
+.weather-app .currentWeather .currentTemperature {
   font-size: 1.5rem;
 }
-.currentWeather .currentCondition {
+@media screen and (min-width: 600px) {
+  .weather-app .currentWeather .currentTemperature {
+    font-size: 2rem;
+  }
+}
+@media screen and (min-width: 1000px) {
+  .weather-app .currentWeather .currentTemperature {
+    font-size: 2.2rem;
+  }
+}
+.weather-app .currentWeather .currentCondition {
   font-size: 0.7rem;
 }
-.currentWeather .currentTemperatureRange {
+@media screen and (min-width: 600px) {
+  .weather-app .currentWeather .currentCondition {
+    font-size: 1rem;
+  }
+}
+.weather-app .currentWeather .currentTemperatureRange {
   display: flex;
   margin-top: 1rem;
   gap: 1rem;
 }
-.currentWeather .currentTemperatureRange .currentMaxTemperature {
+.weather-app .currentWeather .currentTemperatureRange .currentMaxTemperature {
   text-align: right;
 }
-.currentWeather .currentTemperatureRange .currentMinTemperature {
+.weather-app .currentWeather .currentTemperatureRange .currentMinTemperature {
   text-align: left;
 }
-.currentWeather .currentTemperatureRange .currentMaxTemperature,
-.currentWeather .currentTemperatureRange .currentMinTemperature {
+.weather-app .currentWeather .currentTemperatureRange .currentMaxTemperature,
+.weather-app .currentWeather .currentTemperatureRange .currentMinTemperature {
   flex: 1;
   font-size: 0.7rem;
 }
-
-.hourlyForecastSection {
+@media screen and (min-width: 600px) {
+  .weather-app .currentWeather .currentTemperatureRange .currentMaxTemperature,
+  .weather-app .currentWeather .currentTemperatureRange .currentMinTemperature {
+    font-size: 1rem;
+  }
+}
+@media screen and (min-width: 1000px) {
+  .weather-app .currentWeather .currentTemperatureRange .currentMaxTemperature,
+  .weather-app .currentWeather .currentTemperatureRange .currentMinTemperature {
+    font-size: 1.2rem;
+  }
+}
+.weather-app .hourlyForecastSection {
   width: 80vw;
   padding: 0.8rem;
   margin: 0 auto;
@@ -88,29 +126,55 @@ body {
   text-shadow: 2px 2px 2px rgb(0, 0, 0);
   margin-bottom: 1rem;
 }
-.hourlyForecastSection .hourlyForecastHeader {
+.weather-app .hourlyForecastSection .hourlyForecastHeader {
   display: flex;
   align-items: flex-start;
+  font-size: 0.7rem;
   padding: 0.2rem;
   margin-bottom: 0.5rem;
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 }
-.hourlyForecastSection .hourlyForecastWrapper {
+@media screen and (min-width: 600px) {
+  .weather-app .hourlyForecastSection .hourlyForecastHeader {
+    font-size: 1rem;
+  }
+}
+@media screen and (min-width: 1000px) {
+  .weather-app .hourlyForecastSection .hourlyForecastHeader {
+    font-size: 1.2rem;
+  }
+}
+.weather-app .hourlyForecastSection .hourlyForecastWrapper {
   display: flex;
   overflow-x: auto;
   white-space: nowrap;
   padding: 0 0.2rem;
 }
-.hourlyForecastSection .hourlyForecast {
+.weather-app .hourlyForecastSection .hourlyForecast {
   display: inline-block;
   margin-right: 10px;
+  font-size: 0.7rem;
 }
-.hourlyForecastSection .weatherIcon {
+@media screen and (min-width: 600px) {
+  .weather-app .hourlyForecastSection .hourlyForecast {
+    font-size: 0.8rem;
+  }
+}
+@media screen and (min-width: 1000px) {
+  .weather-app .hourlyForecastSection .hourlyForecast {
+    font-size: 1rem;
+  }
+}
+.weather-app .hourlyForecastSection .weatherIcon {
   width: 35px;
   height: 35px;
 }
-
-.forecast3Days {
+@media screen and (min-width: 1200px) {
+  .weather-app .hourlyForecastSection {
+    max-width: 1000px;
+  }
+}
+.weather-app .forecast3Days {
   width: 80vw;
   padding: 0.8rem;
   margin: 0 auto;
@@ -122,7 +186,7 @@ body {
   color: white;
   text-shadow: 2px 2px 2px rgb(0, 0, 0);
 }
-.forecast3Days .forecastHeader {
+.weather-app .forecast3Days .forecastHeader {
   display: flex;
   align-items: flex-start;
   display: flex;
@@ -130,41 +194,66 @@ body {
   font-size: 0.7rem;
   margin-bottom: 0.3rem;
 }
-.forecast3Days .forecast {
+@media screen and (min-width: 600px) {
+  .weather-app .forecast3Days .forecastHeader {
+    font-size: 1rem;
+  }
+}
+@media screen and (min-width: 1000px) {
+  .weather-app .forecast3Days .forecastHeader {
+    font-size: 1.2rem;
+  }
+}
+.weather-app .forecast3Days .forecast {
   display: flex;
   justify-content: space-between;
   margin-bottom: 0.2rem;
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  font-size: 0.7rem;
 }
-.forecast3Days .forecast .forecastDay {
+.weather-app .forecast3Days .forecast .forecastDay {
   width: 100px;
 }
-.forecast3Days .forecast .forecastDay,
-.forecast3Days .forecast .forecastTemp {
+.weather-app .forecast3Days .forecast .forecastDay,
+.weather-app .forecast3Days .forecast .forecastTemp {
   display: flex;
   align-items: center;
   gap: 10vw;
   padding: 5px;
 }
-.forecast3Days .forecast .forecastTemp {
+.weather-app .forecast3Days .forecast .forecastTemp {
   display: flex;
   align-items: center;
   justify-content: center;
   margin-left: 10px;
 }
-.forecast3Days .forecast .forecastTemp .forecastTempMin,
-.forecast3Days .forecast .forecastTemp .forecastTempMax {
+.weather-app .forecast3Days .forecast .forecastTemp .forecastTempMin,
+.weather-app .forecast3Days .forecast .forecastTemp .forecastTempMax {
   width: 50px;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-.forecast3Days .weatherIcon {
+@media screen and (min-width: 600px) {
+  .weather-app .forecast3Days .forecast {
+    font-size: 0.8rem;
+  }
+}
+@media screen and (min-width: 1000px) {
+  .weather-app .forecast3Days .forecast {
+    font-size: 1rem;
+  }
+}
+.weather-app .forecast3Days .weatherIcon {
   width: 35px;
   height: 35px;
 }
-
-.forecastAddons {
+@media screen and (min-width: 1200px) {
+  .weather-app .forecast3Days {
+    max-width: 1000px;
+  }
+}
+.weather-app .forecastAddons {
   width: 80vw;
   padding: 0.8rem;
   margin: 0 auto;
@@ -177,7 +266,7 @@ body {
   text-shadow: 2px 2px 2px rgb(0, 0, 0);
   margin-top: 0.4rem;
 }
-.forecastAddons .forecastHeader {
+.weather-app .forecastAddons .forecastHeader {
   display: flex;
   align-items: flex-start;
   display: flex;
@@ -185,23 +274,188 @@ body {
   font-size: 0.7rem;
   margin-bottom: 0.3rem;
 }
-.forecastAddons .addon-Wrapper {
+@media screen and (min-width: 600px) {
+  .weather-app .forecastAddons .forecastHeader {
+    font-size: 1rem;
+  }
+}
+@media screen and (min-width: 1000px) {
+  .weather-app .forecastAddons .forecastHeader {
+    font-size: 1.2rem;
+  }
+}
+.weather-app .forecastAddons .addon-Wrapper {
   display: flex;
   flex-direction: column;
 }
-.forecastAddons .humidity-Wrapper,
-.forecastAddons .wind-kph-Wrapper,
-.forecastAddons .wind-Direction-Wrapper {
+.weather-app .forecastAddons .humidity-Wrapper,
+.weather-app .forecastAddons .wind-kph-Wrapper,
+.weather-app .forecastAddons .wind-Direction-Wrapper {
   display: flex;
   flex-direction: row;
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
   justify-content: space-between;
   margin-bottom: 0.2rem;
+  padding: 5px;
+  font-size: 0.7rem;
+}
+@media screen and (min-width: 600px) {
+  .weather-app .forecastAddons .humidity-Wrapper,
+  .weather-app .forecastAddons .wind-kph-Wrapper,
+  .weather-app .forecastAddons .wind-Direction-Wrapper {
+    font-size: 0.8rem;
+  }
+}
+@media screen and (min-width: 1000px) {
+  .weather-app .forecastAddons .humidity-Wrapper,
+  .weather-app .forecastAddons .wind-kph-Wrapper,
+  .weather-app .forecastAddons .wind-Direction-Wrapper {
+    font-size: 1rem;
+  }
+}
+@media screen and (min-width: 1200px) {
+  .weather-app .forecastAddons {
+    max-width: 1000px;
+  }
+}
+.weather-app .footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 97%;
+  height: 5vh;
+  backdrop-filter: blur(50px);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-left: auto;
+  margin-right: auto;
+  z-index: 2;
+  border-radius: 10px;
+  border: solid rgba(255, 255, 255, 0.1) 0.5px;
+}
+.weather-app .footer .bookmarkPages {
+  display: flex;
+  flex-direction: block;
+  overflow-x: auto;
+}
+.weather-app .footer .bookmarkPage {
+  margin: 0.5rem;
+  color: white;
+}
+.weather-app .footer #markedBookmarkButton,
+.weather-app .footer #unmarkedBookmarkButton {
+  margin: 5px;
+  border-radius: 10px;
+  background: transparent;
+  border: 0;
+  color: white;
+}
+.weather-app .footer .bookmarkPage.selectedBookmark {
+  width: 10px;
+  height: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.weather-app .footer .iconShow {
+  display: block;
+}
+.weather-app .footer .iconHide {
+  display: none;
+}
+.weather-app.backgroundSunnySkyDay {
+  background: url(../utilitys/pictures/sunnySkyDay.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.weather-app.backgroundSunnySkyNight {
+  background: url(../utilitys/pictures/sunnySkyNight.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.weather-app.backgroundClearlySkyDay {
+  background: url(../utilitys/pictures/clearlySkyDay.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.weather-app.backgroundClearlySkyNight {
+  background: url(../utilitys/pictures/clearlySkyNight.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.weather-app.backgroundCloudySkyDay {
+  background: url(../utilitys/pictures/cloudySkyDay.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.weather-app.backgroundCloudySkyNight {
+  background: url(../utilitys/pictures/cloudySkyNight.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.weather-app.backgroundRainySkyDay {
+  background: url(../utilitys/pictures/rainySkyDay.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.weather-app.backgroundRainySkyNight {
+  background: url(../utilitys/pictures/rainySkyNight.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.weather-app.backgroundStormySkyNight {
+  background: url(../utilitys/pictures/stormySkyNight.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.weather-app.backgroundStormySkyDay {
+  background: url(../utilitys/pictures/stormySkyDay.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.weather-app.backgroundFoggySkyNight {
+  background: url(../utilitys/pictures/foggySkyNight.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.weather-app.backgroundFoggySkyDay {
+  background: url(../utilitys/pictures/foggySkyDay.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.weather-app.backgroundThunderySkyNight {
+  background: url(../utilitys/pictures/thunderySkyNight.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.weather-app.backgroundThunderySkyDay {
+  background: url(../utilitys/pictures/thunderySkyDay.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
-.icon {
-  width: 35px;
-  height: 35px;
+.showNav {
+  height: 40%;
+}
+
+.hideNav {
+  height: 0%;
 }
 
 #searchIcon,
@@ -246,6 +500,16 @@ body {
 .overlay button:hover, .overlay button:focus {
   color: #f1f1f1;
 }
+@media screen and (min-width: 600px) {
+  .overlay button {
+    font-size: 1rem;
+  }
+}
+@media screen and (min-width: 1000px) {
+  .overlay button {
+    font-size: 1.2rem;
+  }
+}
 .overlay #closeButton {
   position: absolute;
   top: 0px;
@@ -263,18 +527,37 @@ body {
 }
 .overlay .input {
   padding: 10px;
-  width: 85px;
   height: 40px;
   background: none;
   border: 3px solid #8e8e8e;
   border-radius: 50px;
   box-sizing: border-box;
   font-family: Comic Sans MS;
-  font-size: 0.7rem;
+  font-size: 0.8rem;
   color: white;
   outline: none;
   transition: 0.4s;
   flex-grow: 1;
+}
+@media screen and (min-width: 600px) {
+  .overlay .input {
+    font-size: 1rem;
+  }
+}
+@media screen and (min-width: 1000px) {
+  .overlay .input {
+    font-size: 1.2rem;
+  }
+}
+@media screen and (min-width: 600px) {
+  .overlay .input.inputNarrow {
+    width: 8rem;
+  }
+}
+@media screen and (min-width: 1000px) {
+  .overlay .input.inputNarrow {
+    width: 11rem;
+  }
 }
 .overlay #searchExecute {
   background: transparent;
@@ -285,10 +568,36 @@ body {
   border-radius: 10px;
   margin-left: 10px;
 }
+.overlay #searchExecute.icon {
+  width: 40px;
+  height: 40px;
+}
+@media screen and (min-width: 600px) {
+  .overlay #searchExecute.icon {
+    width: 45px;
+    height: 45px;
+  }
+}
+@media screen and (min-width: 1000px) {
+  .overlay #searchExecute.icon {
+    width: 45px;
+    height: 45px;
+  }
+}
 .overlay .box:hover input {
   width: 10rem;
   background: #3b3640;
   border-radius: 10px;
+}
+@media screen and (min-width: 600px) {
+  .overlay .box:hover input {
+    width: 15rem;
+  }
+}
+@media screen and (min-width: 1000px) {
+  .overlay .box:hover input {
+    width: 22rem;
+  }
 }
 .overlay .box i {
   position: absolute;
@@ -307,152 +616,6 @@ body {
 }
 .overlay .inputNarrow {
   width: 85px;
-}
-
-.showNav {
-  height: 40%;
-}
-
-.hideNav {
-  height: 0%;
-}
-
-.footer {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  width: 97%;
-  height: 5vh;
-  backdrop-filter: blur(50px);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-left: auto;
-  margin-right: auto;
-  z-index: 2;
-  border-radius: 10px;
-  border: solid rgba(255, 255, 255, 0.1) 0.5px;
-}
-
-.bookmarkPages {
-  display: flex;
-  flex-direction: block;
-  overflow-x: auto;
-}
-
-.bookmarkPage {
-  margin: 0.5rem;
-  color: white;
-}
-
-#markedBookmarkButton,
-#unmarkedBookmarkButton {
-  margin: 5px;
-  border-radius: 10px;
-  background: transparent;
-  border: 0;
-  color: white;
-}
-
-.bookmarkPage.selectedBookmark {
-  width: 10px;
-  height: 10px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.iconShow {
-  display: block;
-}
-
-.iconHide {
-  display: none;
-}
-
-.weather-app.backgroundSunnySkyDay {
-  background: url(../utilitys/pictures/sunnySkyDay.jpg);
-  background-position: center;
-  background-repeat: no-repeat;
-}
-
-.weather-app.backgroundSunnySkyNight {
-  background: url(../utilitys/pictures/sunnySkyNight.jpg);
-  background-position: center;
-  background-repeat: no-repeat;
-}
-
-.weather-app.backgroundClearlySkyDay {
-  background: url(../utilitys/pictures/clearlySkyDay.jpg);
-  background-position: center;
-  background-repeat: no-repeat;
-}
-
-.weather-app.backgroundClearlySkyNight {
-  background: url(../utilitys/pictures/clearlySkyNight.jpg);
-  background-position: center;
-  background-repeat: no-repeat;
-}
-
-.weather-app.backgroundCloudySkyDay {
-  background: url(../utilitys/pictures/cloudySkyDay.jpg);
-  background-position: center;
-  background-repeat: no-repeat;
-}
-
-.weather-app.backgroundCloudySkyNight {
-  background: url(../utilitys/pictures/cloudySkyNight.jpg);
-  background-position: center;
-  background-repeat: no-repeat;
-}
-
-.weather-app.backgroundRainySkyDay {
-  background: url(../utilitys/pictures/rainySkyDay.jpg);
-  background-position: center;
-  background-repeat: no-repeat;
-}
-
-.weather-app.backgroundRainySkyNight {
-  background: url(../utilitys/pictures/rainySkyNight.jpg);
-  background-position: center;
-  background-repeat: no-repeat;
-}
-
-.weather-app.backgroundStormySkyNight {
-  background: url(../utilitys/pictures/stormySkyNight.jpg);
-  background-position: center;
-  background-repeat: no-repeat;
-}
-
-.weather-app.backgroundStormySkyDay {
-  background: url(../utilitys/pictures/stormySkyDay.jpg);
-  background-position: center;
-  background-repeat: no-repeat;
-}
-
-.weather-app.backgroundFoggySkyNight {
-  background: url(../utilitys/pictures/foggySkyNight.jpg);
-  background-position: center;
-  background-repeat: no-repeat;
-}
-
-.weather-app.backgroundFoggySkyDay {
-  background: url(../utilitys/pictures/foggySkyDay.jpg);
-  background-position: center;
-  background-repeat: no-repeat;
-}
-
-.weather-app.backgroundThunderySkyNight {
-  background: url(../utilitys/pictures/thunderySkyNight.jpg);
-  background-position: center;
-  background-repeat: no-repeat;
-}
-
-.weather-app.backgroundThunderySkyDay {
-  background: url(../utilitys/pictures/thunderySkyDay.jpg);
-  background-position: center;
-  background-repeat: no-repeat;
 }
 
 /*# sourceMappingURL=styles.css.map */

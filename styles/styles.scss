@@ -60,7 +60,7 @@ body {
 @mixin weatherBackgroundCondition {
   background-position: center;
   background-repeat: no-repeat;
-  // background-size: cover;
+  background-size: cover;
 }
 
 @mixin headerPosition() {
@@ -73,16 +73,9 @@ body {
   height: $height;
 }
 
-// Suche und Schließen Icons
-#searchIcon {
-  position: absolute;
-  top: 5px;
-  right: 5px;
-  background: transparent;
-  border: 0;
-  color: $textColor;
-  backdrop-filter: blur(40px);
-  border-radius: 10px;
+// Allgemeine Icons
+.icon {
+  @include iconSize(35px, 35px);
 }
 
 // Hauptanwendung
@@ -97,143 +90,392 @@ body {
   background-repeat: no-repeat;
   background-size: cover;
   z-index: 1;
-}
 
-// Ort Header
-.locationHeader {
-  font-size: $headerFontSize;
-  color: $textColor;
-  text-shadow: 2px 2px 2px $shadowColor;
-}
+  #searchIcon {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background: transparent;
+    border: 0;
+    color: $textColor;
+    backdrop-filter: blur(40px);
+    border-radius: 10px;
+  }
 
-// Aktuelles Wetter
-.currentWeather {
-  color: $textColor;
-  text-shadow: 2px 1px 9px $shadowColor;
-  padding: 1rem;
-  border-radius: 1rem;
-  margin-bottom: 2rem;
-  .currentTemperature {
+  // Ort Header
+  .locationHeader {
     font-size: $headerFontSize;
-  }
-  .currentCondition {
-    font-size: $defaultFontSize;
-  }
-  .currentTemperatureRange {
-    display: flex;
-    margin-top: 1rem;
-    gap: 1rem;
-    .currentMaxTemperature {
-      text-align: right;
+    color: $textColor;
+    text-shadow: 2px 2px 2px $shadowColor;
+
+    @media screen and (min-width: 600px) {
+      font-size: calc($headerFontSize + 0.5rem);
     }
-    .currentMinTemperature {
-      text-align: left;
+
+    @media screen and (min-width: 1000px) {
+      font-size: calc($headerFontSize + 0.7rem);
     }
-    .currentMaxTemperature,
-    .currentMinTemperature {
-      flex: 1;
+  }
+
+  // Aktuelles Wetter
+  .currentWeather {
+    color: $textColor;
+    text-shadow: 2px 1px 9px $shadowColor;
+    padding: 1rem;
+    border-radius: 1rem;
+    margin-bottom: 2rem;
+    .currentTemperature {
+      font-size: $headerFontSize;
+
+      @media screen and (min-width: 600px) {
+        font-size: calc($headerFontSize + 0.5rem);
+      }
+
+      @media screen and (min-width: 1000px) {
+        font-size: calc($headerFontSize + 0.7rem);
+      }
+    }
+
+    .currentCondition {
       font-size: $defaultFontSize;
-    }
-  }
-}
 
-// Stündliche Vorhersage
-.hourlyForecastSection {
-  @include backgroundCondition();
-  margin-bottom: 1rem;
-  .hourlyForecastHeader {
-    @include headerPosition();
-    padding: 0.2rem;
-    margin-bottom: 0.5rem;
-    border-bottom: $underLine;
-  }
-  .hourlyForecastWrapper {
-    display: flex;
-    overflow-x: auto;
-    white-space: nowrap;
-    padding: 0 0.2rem;
-  }
-  .hourlyForecast {
-    display: inline-block;
-    margin-right: 10px;
-  }
-  .weatherIcon {
-    @include iconSize();
-  }
-}
+      @media screen and (min-width: 600px) {
+        font-size: calc($defaultFontSize + 0.3rem);
+      }
+    }
 
-// 7-Tage-Vorhersage
-.forecast3Days {
-  @include backgroundCondition();
-  .forecastHeader {
-    @include headerPosition();
-    display: flex;
-    align-items: center;
-    font-size: $defaultFontSize;
-    margin-bottom: 0.3rem;
-  }
-  .forecast {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 0.2rem;
-    border-bottom: $underLine;
-    .forecastDay {
-      width: 100px;
-    }
-    .forecastDay,
-    .forecastTemp {
+    .currentTemperatureRange {
       display: flex;
-      align-items: center;
-      gap: 10vw;
-      padding: 5px;
-    }
-    .forecastTemp {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-left: 10px;
-      .forecastTempMin,
-      .forecastTempMax {
-        width: 50px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
+      margin-top: 1rem;
+      gap: 1rem;
+
+      .currentMaxTemperature {
+        text-align: right;
+      }
+      .currentMinTemperature {
+        text-align: left;
+      }
+      .currentMaxTemperature,
+      .currentMinTemperature {
+        flex: 1;
+        font-size: $defaultFontSize;
+
+        @media screen and (min-width: 600px) {
+          font-size: calc($defaultFontSize + 0.3rem);
+        }
+
+        @media screen and (min-width: 1000px) {
+          font-size: calc($defaultFontSize + 0.5rem);
+        }
       }
     }
   }
-  .weatherIcon {
-    @include iconSize();
-  }
-}
 
-.forecastAddons {
-  @include backgroundCondition();
-  margin-top: 0.4rem;
-  .forecastHeader {
-    @include headerPosition();
-    display: flex;
-    align-items: center;
-    font-size: $defaultFontSize;
-    margin-bottom: 0.3rem;
+  // Stündliche Vorhersage
+  .hourlyForecastSection {
+    @include backgroundCondition();
+    margin-bottom: 1rem;
+
+    .hourlyForecastHeader {
+      @include headerPosition();
+      font-size: $defaultFontSize;
+      padding: 0.2rem;
+      margin-bottom: 0.5rem;
+      border-bottom: $underLine;
+
+      @media screen and (min-width: 600px) {
+        font-size: calc($defaultFontSize + 0.3rem);
+      }
+
+      @media screen and (min-width: 1000px) {
+        font-size: calc($defaultFontSize + 0.5rem);
+      }
+    }
+
+    .hourlyForecastWrapper {
+      display: flex;
+      overflow-x: auto;
+      white-space: nowrap;
+      padding: 0 0.2rem;
+    }
+
+    .hourlyForecast {
+      display: inline-block;
+      margin-right: 10px;
+      font-size: $defaultFontSize;
+
+      @media screen and (min-width: 600px) {
+        font-size: calc($defaultFontSize + 0.1rem);
+      }
+
+      @media screen and (min-width: 1000px) {
+        font-size: calc($defaultFontSize + 0.3rem);
+      }
+    }
+
+    .weatherIcon {
+      @include iconSize();
+    }
+
+    @media screen and (min-width: 1200px) {
+      max-width: 1000px;
+    }
   }
-  .addon-Wrapper {
-    display: flex;
-    flex-direction: column;
+
+  // 3-Tages-Vorhersage
+  .forecast3Days {
+    @include backgroundCondition();
+    .forecastHeader {
+      @include headerPosition();
+      display: flex;
+      align-items: center;
+      font-size: $defaultFontSize;
+      margin-bottom: 0.3rem;
+
+      @media screen and (min-width: 600px) {
+        font-size: calc($defaultFontSize + 0.3rem);
+      }
+
+      @media screen and (min-width: 1000px) {
+        font-size: calc($defaultFontSize + 0.5rem);
+      }
+    }
+
+    .forecast {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 0.2rem;
+      border-bottom: $underLine;
+      font-size: $defaultFontSize;
+      .forecastDay {
+        width: 100px;
+      }
+
+      .forecastDay,
+      .forecastTemp {
+        display: flex;
+        align-items: center;
+        gap: 10vw;
+        padding: 5px;
+      }
+
+      .forecastTemp {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-left: 10px;
+        .forecastTempMin,
+        .forecastTempMax {
+          width: 50px;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+        }
+      }
+
+      @media screen and (min-width: 600px) {
+        font-size: calc($defaultFontSize + 0.1rem);
+      }
+
+      @media screen and (min-width: 1000px) {
+        font-size: calc($defaultFontSize + 0.3rem);
+      }
+    }
+
+    .weatherIcon {
+      @include iconSize();
+    }
+
+    @media screen and (min-width: 1200px) {
+      max-width: 1000px;
+    }
   }
-  .humidity-Wrapper,
-  .wind-kph-Wrapper,
-  .wind-Direction-Wrapper {
+
+  .forecastAddons {
+    @include backgroundCondition();
+    margin-top: 0.4rem;
+
+    .forecastHeader {
+      @include headerPosition();
+      display: flex;
+      align-items: center;
+      font-size: $defaultFontSize;
+      margin-bottom: 0.3rem;
+
+      @media screen and (min-width: 600px) {
+        font-size: calc($defaultFontSize + 0.3rem);
+      }
+
+      @media screen and (min-width: 1000px) {
+        font-size: calc($defaultFontSize + 0.5rem);
+      }
+    }
+
+    .addon-Wrapper {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .humidity-Wrapper,
+    .wind-kph-Wrapper,
+    .wind-Direction-Wrapper {
+      display: flex;
+      flex-direction: row;
+      border-bottom: $underLine;
+      justify-content: space-between;
+      margin-bottom: 0.2rem;
+      padding: 5px;
+      font-size: $defaultFontSize;
+
+      @media screen and (min-width: 600px) {
+        font-size: calc($defaultFontSize + 0.1rem);
+      }
+
+      @media screen and (min-width: 1000px) {
+        font-size: calc($defaultFontSize + 0.3rem);
+      }
+    }
+
+    @media screen and (min-width: 1200px) {
+      max-width: 1000px;
+    }
+  }
+
+  .footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 97%;
+    height: 5vh;
+    backdrop-filter: blur(50px);
     display: flex;
-    flex-direction: row;
-    border-bottom: $underLine;
     justify-content: space-between;
-    margin-bottom: 0.2rem;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+    z-index: 2;
+    border-radius: 10px;
+    border: solid $tertiaryColor 0.5px;
+
+    .bookmarkPages {
+      display: flex;
+      flex-direction: block;
+      overflow-x: auto;
+    }
+
+    .bookmarkPage {
+      margin: 0.5rem;
+      color: $textColor;
+    }
+
+    #markedBookmarkButton,
+    #unmarkedBookmarkButton {
+      margin: 5px;
+      border-radius: 10px;
+      background: transparent;
+      border: 0;
+      color: $textColor;
+    }
+
+    .bookmarkPage {
+      &.selectedBookmark {
+        width: 10px;
+        height: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    }
+
+    .iconShow {
+      display: block;
+    }
+
+    .iconHide {
+      display: none;
+    }
+  }
+
+  // Hintergrundbilder für verschiedene Wetterbedingungen
+  &.backgroundSunnySkyDay {
+    background: url(../utilitys/pictures/sunnySkyDay.jpg);
+    @include weatherBackgroundCondition();
+  }
+
+  &.backgroundSunnySkyNight {
+    background: url(../utilitys/pictures/sunnySkyNight.jpg);
+    @include weatherBackgroundCondition();
+  }
+
+  &.backgroundClearlySkyDay {
+    background: url(../utilitys/pictures/clearlySkyDay.jpg);
+    @include weatherBackgroundCondition();
+  }
+
+  &.backgroundClearlySkyNight {
+    background: url(../utilitys/pictures/clearlySkyNight.jpg);
+    @include weatherBackgroundCondition();
+  }
+
+  &.backgroundCloudySkyDay {
+    background: url(../utilitys/pictures/cloudySkyDay.jpg);
+    @include weatherBackgroundCondition();
+  }
+
+  &.backgroundCloudySkyNight {
+    background: url(../utilitys/pictures/cloudySkyNight.jpg);
+    @include weatherBackgroundCondition();
+  }
+
+  &.backgroundRainySkyDay {
+    background: url(../utilitys/pictures/rainySkyDay.jpg);
+    @include weatherBackgroundCondition();
+  }
+
+  &.backgroundRainySkyNight {
+    background: url(../utilitys/pictures/rainySkyNight.jpg);
+    @include weatherBackgroundCondition();
+  }
+
+  &.backgroundStormySkyNight {
+    background: url(../utilitys/pictures/stormySkyNight.jpg);
+    @include weatherBackgroundCondition();
+  }
+
+  &.backgroundStormySkyDay {
+    background: url(../utilitys/pictures/stormySkyDay.jpg);
+    @include weatherBackgroundCondition();
+  }
+
+  &.backgroundFoggySkyNight {
+    background: url(../utilitys/pictures/foggySkyNight.jpg);
+    @include weatherBackgroundCondition();
+  }
+
+  &.backgroundFoggySkyDay {
+    background: url(../utilitys/pictures/foggySkyDay.jpg);
+    @include weatherBackgroundCondition();
+  }
+
+  &.backgroundThunderySkyNight {
+    background: url(../utilitys/pictures/thunderySkyNight.jpg);
+    @include weatherBackgroundCondition();
+  }
+
+  &.backgroundThunderySkyDay {
+    background: url(../utilitys/pictures/thunderySkyDay.jpg);
+    @include weatherBackgroundCondition();
   }
 }
 
-// Allgemeine Icons
-.icon {
-  @include iconSize(35px, 35px);
+// Navigation und Fußzeile
+.showNav {
+  height: 40%;
+}
+
+.hideNav {
+  height: 0%;
 }
 
 // Interaktive Elemente
@@ -246,7 +488,6 @@ body {
   cursor: pointer;
 }
 
-// Überlagerung
 .overlay {
   width: 100%;
   position: fixed;
@@ -258,6 +499,7 @@ body {
   overflow-y: hidden;
   z-index: 2;
   transition: 1s;
+
   &-content {
     position: relative;
     top: 0;
@@ -280,6 +522,14 @@ body {
     &:focus {
       color: #f1f1f1;
     }
+
+    @media screen and (min-width: 600px) {
+      font-size: calc($defaultFontSize + 0.3rem);
+    }
+
+    @media screen and (min-width: 1000px) {
+      font-size: calc($defaultFontSize + 0.5rem);
+    }
   }
 
   & #closeButton {
@@ -301,18 +551,34 @@ body {
 
   .input {
     padding: 10px;
-    width: 85px;
     height: 40px;
     background: none;
     border: 3px solid $primary-color;
     border-radius: 50px;
     box-sizing: border-box;
     font-family: Comic Sans MS;
-    font-size: $defaultFontSize;
+    font-size: calc($defaultFontSize + 0.1rem);
     color: $textColor;
     outline: none;
     transition: 0.4s;
     flex-grow: 1;
+
+    @media screen and (min-width: 600px) {
+      font-size: calc($defaultFontSize + 0.3rem);
+    }
+
+    @media screen and (min-width: 1000px) {
+      font-size: calc($defaultFontSize + 0.5rem);
+    }
+    &.inputNarrow {
+      @media screen and (min-width: 600px) {
+        width: 8rem;
+      }
+
+      @media screen and (min-width: 1000px) {
+        width: 11rem;
+      }
+    }
   }
 
   #searchExecute {
@@ -323,12 +589,34 @@ body {
     backdrop-filter: blur(40px);
     border-radius: 10px;
     margin-left: 10px;
+    &.icon {
+      width: 40px;
+      height: 40px;
+
+      @media screen and (min-width: 600px) {
+        width: 45px;
+        height: 45px;
+      }
+
+      @media screen and (min-width: 1000px) {
+        width: 45px;
+        height: 45px;
+      }
+    }
   }
 
   .box:hover input {
     width: 10rem;
     background: #3b3640;
     border-radius: 10px;
+
+    @media screen and (min-width: 600px) {
+      width: 15rem;
+    }
+
+    @media screen and (min-width: 1000px) {
+      width: 22rem;
+    }
   }
 
   .box i {
@@ -350,201 +638,3 @@ body {
     width: 85px;
   }
 }
-
-// Navigation und Fußzeile
-.showNav {
-  height: 40%;
-}
-
-.hideNav {
-  height: 0%;
-}
-
-.footer {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  width: 97%;
-  height: 5vh;
-  backdrop-filter: blur(50px);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-left: auto;
-  margin-right: auto;
-  z-index: 2;
-  border-radius: 10px;
-  border: solid $tertiaryColor 0.5px;
-}
-
-.bookmarkPages {
-  display: flex;
-  flex-direction: block;
-  overflow-x: auto;
-}
-
-.bookmarkPage {
-  margin: 0.5rem;
-  color: $textColor;
-}
-
-#markedBookmarkButton,
-#unmarkedBookmarkButton {
-  margin: 5px;
-  border-radius: 10px;
-  background: transparent;
-  border: 0;
-  color: $textColor;
-}
-
-.bookmarkPage {
-  &.selectedBookmark {
-    width: 10px;
-    height: 10px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-}
-
-.iconShow {
-  display: block;
-}
-
-.iconHide {
-  display: none;
-}
-
-// Hintergrundbilder für verschiedene Wetterbedingungen
-.weather-app.backgroundSunnySkyDay {
-  background: url(../utilitys/pictures/sunnySkyDay.jpg);
-  @include weatherBackgroundCondition();
-}
-
-.weather-app.backgroundSunnySkyNight {
-  background: url(../utilitys/pictures/sunnySkyNight.jpg);
-  @include weatherBackgroundCondition();
-}
-
-.weather-app.backgroundClearlySkyDay {
-  background: url(../utilitys/pictures/clearlySkyDay.jpg);
-  @include weatherBackgroundCondition();
-}
-
-.weather-app.backgroundClearlySkyNight {
-  background: url(../utilitys/pictures/clearlySkyNight.jpg);
-  @include weatherBackgroundCondition();
-}
-
-.weather-app.backgroundCloudySkyDay {
-  background: url(../utilitys/pictures/cloudySkyDay.jpg);
-  @include weatherBackgroundCondition();
-}
-
-.weather-app.backgroundCloudySkyNight {
-  background: url(../utilitys/pictures/cloudySkyNight.jpg);
-  @include weatherBackgroundCondition();
-}
-
-.weather-app.backgroundRainySkyDay {
-  background: url(../utilitys/pictures/rainySkyDay.jpg);
-  @include weatherBackgroundCondition();
-}
-
-.weather-app.backgroundRainySkyNight {
-  background: url(../utilitys/pictures/rainySkyNight.jpg);
-  @include weatherBackgroundCondition();
-}
-
-.weather-app.backgroundStormySkyNight {
-  background: url(../utilitys/pictures/stormySkyNight.jpg);
-  @include weatherBackgroundCondition();
-}
-
-.weather-app.backgroundStormySkyDay {
-  background: url(../utilitys/pictures/stormySkyDay.jpg);
-  @include weatherBackgroundCondition();
-}
-
-.weather-app.backgroundFoggySkyNight {
-  background: url(../utilitys/pictures/foggySkyNight.jpg);
-  @include weatherBackgroundCondition();
-}
-
-.weather-app.backgroundFoggySkyDay {
-  background: url(../utilitys/pictures/foggySkyDay.jpg);
-  @include weatherBackgroundCondition();
-}
-
-.weather-app.backgroundThunderySkyNight {
-  background: url(../utilitys/pictures/thunderySkyNight.jpg);
-  @include weatherBackgroundCondition();
-}
-
-.weather-app.backgroundThunderySkyDay {
-  background: url(../utilitys/pictures/thunderySkyDay.jpg);
-  @include weatherBackgroundCondition();
-}
-
-// Media Queries
-
-// @media screen and (min-height: 600px) {
-//   .weather-app {
-//     font-size: 1.2rem;
-//   }
-//   .locationHeader {
-//     font-size: 3rem;
-//   }
-
-//   .currentWeather {
-//     .currentTemperature {
-//       font-size: $headerFontSize;
-//     }
-//     .currentCondition {
-//       font-size: $defaultFontSize;
-//     }
-//     .currentMaxTemperature,
-//     .currentMinTemperature {
-//       font-size: $defaultFontSize;
-//     }
-//   }
-//   .overlay {
-//     .input {
-//       width: 8rem;
-//     }
-//     .box:hover input {
-//       width: 15rem;
-//     }
-//   }
-// }
-
-// @media screen and (min-height: 1000px) {
-//   .weather-app {
-//     font-size: 1.5rem;
-//   }
-
-//   .overlay {
-//     .input {
-//       width: 10rem;
-//     }
-//     .box:hover input {
-//       width: 20rem;
-//     }
-//   }
-// }
-
-// @media screen and (min-height: 1200px) {
-//   .weather-app {
-//     font-size: 1.8rem;
-//   }
-
-//   .overlay {
-//     .input {
-//       width: 12rem;
-//     }
-//     .box:hover input {
-//       width: 25rem;
-//     }
-//   }
-// }

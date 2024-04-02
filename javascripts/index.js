@@ -65,7 +65,7 @@ function displayHourlyForecastWeather(hourlyForecastData) {
 function displayForecastWeather(forecastData) {
   const forecast = forecastData.forecast.forecastday;
 
-  let html = `<div class="forecastHeader">3-DAY FORECAST</div>`;
+  let html = `<div class="forecastHeader">3-Day Forecast</div>`;
 
   forecast.forEach((forecastDay) => {
     html += `    
@@ -390,7 +390,6 @@ function saveBookmarksToLocalStorage(bookmarkList) {
 
 function loadBookmarksFromLocalStorage() {
   const bookmarkLists = getBookmarks();
-  console.log();
   const newBookmarkList = bookmarkLists.map((pages) => createBookmarkEl(pages));
   clearExistingDivBookmarks(newBookmarkList);
 }
