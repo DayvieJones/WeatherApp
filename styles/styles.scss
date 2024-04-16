@@ -30,6 +30,7 @@ body,
   font-weight: 300;
   font-style: normal;
 }
+
 body {
   overflow: hidden;
 }
@@ -294,6 +295,7 @@ body {
   .forecastAddons {
     @include backgroundCondition();
     margin-top: 0.4rem;
+    margin-bottom: 4rem;
 
     .forecastHeader {
       @include headerPosition();
@@ -367,6 +369,10 @@ body {
     .bookmarkPage {
       margin: 0.5rem;
       color: $textColor;
+      border-radius: 50%;
+      height: 10px;
+      width: 10px;
+      border: solid white 2px;
     }
 
     #markedBookmarkButton,
@@ -380,11 +386,7 @@ body {
 
     .bookmarkPage {
       &.selectedBookmark {
-        width: 10px;
-        height: 10px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+        background-color: white;
       }
     }
 

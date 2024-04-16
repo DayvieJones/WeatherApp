@@ -265,6 +265,7 @@ body {
   color: white;
   text-shadow: 2px 2px 2px rgb(0, 0, 0);
   margin-top: 0.4rem;
+  margin-bottom: 4rem;
 }
 .weather-app .forecastAddons .forecastHeader {
   display: flex;
@@ -343,6 +344,10 @@ body {
 .weather-app .footer .bookmarkPage {
   margin: 0.5rem;
   color: white;
+  border-radius: 50%;
+  height: 10px;
+  width: 10px;
+  border: solid white 2px;
 }
 .weather-app .footer #markedBookmarkButton,
 .weather-app .footer #unmarkedBookmarkButton {
@@ -353,11 +358,7 @@ body {
   color: white;
 }
 .weather-app .footer .bookmarkPage.selectedBookmark {
-  width: 10px;
-  height: 10px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  background-color: white;
 }
 .weather-app .footer .iconShow {
   display: block;

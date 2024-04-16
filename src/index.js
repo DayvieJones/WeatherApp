@@ -145,8 +145,7 @@ function getTimeByEpoche(timestamp) {
 
 function checkWeatherCondition(condition) {
   const weatherCondition = condition.current.condition.text.toLowerCase();
-
-  switch (true) {
+  switch (weatherCondition.length > 0) {
     case weatherCondition.includes("clear"):
       return "ClearlySky";
     case weatherCondition.includes("sunny"):
@@ -309,7 +308,6 @@ function createBookmarkEl(newBookmark) {
   const bookmarkElement = document.createElement("div");
   bookmarkElement.classList.add("bookmarkPage", "isBookmarked");
   bookmarkElement.id = newBookmark.id;
-  bookmarkElement.innerText = "O";
 
   //Event listener to respond to bookmark element clicks
   bookmarkElement.addEventListener("click", () => {
